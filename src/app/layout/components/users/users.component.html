@@ -1,0 +1,237 @@
+<div class="app-content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-user"></i> Users</h1>
+            <p></p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><a class="fa fa-home fa-lg breadcrumb-home-link" (click)="goToDashboard()"></a></li>
+            <li class="breadcrumb-item"><a href="#">Users</a></li>
+        </ul>
+    </div>
+<!--    <div class="row">-->
+<!--        <div class="col-sm-1 offset-11 text-right form-group mt-3 mb-3">-->
+<!--            <button class="btn btn-sm btn-primary" (click)="addUser()">Add User</button>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="row">
+        <div class="col-md-12" >
+            <div class="tile">
+                <div class="tile-body">
+                        <div class="row">
+                            <div class="col-sm-1 offset-11 text-right form-group mt-3 mb-3">
+                                <button class="btn btn-sm btn-primary" (click)="addUser()">Add User</button>
+                            </div>
+                        </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover custom-table">
+                                    <thead class="thead-dark">
+                                    <tr class="text-left">
+                                        <th>S.No</th>
+                                        <th scope="col">Full Name</th>
+                                        <th scope="col">Phone Number</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let user of listOfAllUsers; let i = index">
+                                        <td>{{i + 1}}</td>
+                                        <td>{{user.firstName + ' ' + user.lastName}}</td>
+                                        <td>{{user.phoneNumber}}</td>
+                                        <td>{{user.email}}</td>
+                                        <td>{{apiService.getRoleName(user.role)}}</td>
+                                        <td>{{user.status}}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-success"
+                                                    (click)="editUser(user._id)" title="Edit User">
+                                                <i class="fa fa-pencil fa-1x" aria-hidden="true"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger ml-1"
+                                                    (click)="deleteUser(user._id)" title="Delete User">
+                                                <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger ml-1"
+                                                    (click)="resetPass(user._id)" title="reset password">
+                                                <i class="fa fa-key" aria-hidden="true"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #addUserModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">{{userId ? 'Edit User' : 'Add User'}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="tile">
+                <div class="tile-body">
+                    <div class="row" style="align-items: center">
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">First Name<span class="mandatory-field">*</span></label>
+                            <input class="form-control form-control-sm" placeholder="First Name"
+                                   maxlength="10" minlength="10"
+                                   [(ngModel)]="data.firstName"
+                                   [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">Last Name<span class="mandatory-field">*</span></label>
+                            <input class="form-control form-control-sm" placeholder="Last Name"
+                                   maxlength="10" minlength="10"
+                                   [(ngModel)]="data.lastName"
+                                   [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">Phone Number<span class="mandatory-field">*</span></label>
+                            <input class="form-control form-control-sm" placeholder=" Enter Phone Number"
+                                   maxlength="10" minlength="10"
+                                   [(ngModel)]="data.phoneNumber"
+                                   [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="col-sm-6 form-group" [hidden]="userId">
+                            <label class="control-label">Password<span class="mandatory-field">*</span></label>
+                            <input type="password" class="form-control form-control-sm" placeholder=" Enter Password"
+                                   minlength="6"
+                                   [(ngModel)]="data.password"
+                                   [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">E-mail<span class="mandatory-field">*</span></label>
+                            <input type="email" class="form-control form-control-sm" placeholder=" Enter email"
+                                   [(ngModel)]="data.email"
+                                   [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">Select Role<span class="mandatory-field">*</span></label>
+                            <select class="form-control form-control-sm"
+                                    [(ngModel)]="data.role" [ngModelOptions]="{standalone: true}">
+                                <option value="" selected>Select Role</option>
+                                <option value="5">User</option>
+                                <option value="30">Admin</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">Select Status<span class="mandatory-field">*</span></label>
+                            <select class="form-control form-control-sm"
+                                    [(ngModel)]="data.status" [ngModelOptions]="{standalone: true}">
+                                <option value="" selected>Select Status</option>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul>
+                            <li *ngFor="let error of errors" class="text-danger">
+                                {{error}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success btn-sm SaveSiteLogins"
+                    (click)="saveUser()">{{userId ? 'Update' : 'Save'}}</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-all-shadow waves-effect waves-light btn-danger"
+                    (click)="close()">Close
+            </button>
+        </div>
+    </ng-template>
+    <ng-template #resetPasswordModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h6 class="modal-title form-head-line-style" style="text-transform: capitalize;">
+                <i class="fa fa-key fa-1x" aria-hidden="true"></i>
+                Change Password
+                <b><u>({{userName}})</u></b>
+            </h6>
+        </div>
+        <!--    <modal-content>-->
+        <div class="modal-body">
+            <form [formGroup]="changePasswordForm" (ngSubmit)="submitChangePassword(changePasswordForm.invalid)">
+                <div class="tile">
+                    <div class="tile-body fields-up text-left">
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label class="control-label">PASSWORD <b class="mandatory-field">*</b></label>
+                                <div class="has-feedback"
+                                     [ngClass]="{ 'has-error' : changePasswordForm.controls['password'].invalid &&
+                                         !changePasswordForm.controls['password'].pristine && changePasswordForm.controls['password'].dirty, 'has-success' : changePasswordForm.controls['password'].valid && !changePasswordForm.controls['password'].pristine}">
+                                    <div class="input-group mb-3">
+                                        <input type="{{showAndHideText}}" class="form-control form-control-bottom"
+                                               id="password"
+                                               name="password"
+                                               placeholder="Enter New Password"
+                                               autocomplete="off"
+                                               [(ngModel)]="changePassword.password"
+                                               formControlName="password"
+                                               [minLength]="6" required
+                                               (ngModelChange)="confirmPasswordC(changePassword.password,changePassword.confirmPassword)">
+                                        <span class="input-group-text" id="basic-addon1"
+                                              (click)="showAndHidePassword(!isTrue, 'Password')">
+                                        <i *ngIf="isTrue" class="fa fa-eye"></i>
+                                        <i *ngIf="!isTrue" class="fa fa-eye-slash"></i>
+                                    </span>
+                                    </div>
+                                    <span class="help-block"
+                                          *ngIf="changePasswordForm.controls['password'].invalid && changePasswordForm.controls['password'].dirty">
+                                Please Enter at least 6 characters</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label for="ConfirmPassword" class="control-label">CONFIRM PASSWORD <b
+                                        class="mandatory-field">*</b></label>
+                                <div class="has-feedback"
+                                     [ngClass]="{ 'has-error' : changePasswordForm.controls['confirmPassword'].invalid &&
+                                         !changePasswordForm.controls['confirmPassword'].pristine && changePasswordForm.controls['confirmPassword'].dirty, 'has-success' : changePasswordForm.controls['confirmPassword'].valid && !changePasswordForm.controls['confirmPassword'].pristine}">
+                                    <div class="input-group mb-3">
+                                        <input type="{{ConfirmPasswordShowAndHideText}}"
+                                               class="form-control form-control-bottom"
+                                               id="confirmPassword"
+                                               name="confirmPassword"
+                                               placeholder="Confirm New Password"
+                                               [(ngModel)]="changePassword.confirmPassword"
+                                               autocomplete="off"
+                                               formControlName="confirmPassword"
+                                               [minLength]="6" required
+                                               (ngModelChange)="confirmPasswordC(changePassword.password,changePassword.confirmPassword)">
+                                        <span class="input-group-text" id="basic-addon2"
+                                              (click)="showAndHidePassword(!isTrueConfirm, 'Confirm')">
+                                        <i *ngIf="isTrueConfirm" class="fa fa-eye"></i>
+                                        <i *ngIf="!isTrueConfirm" class="fa fa-eye-slash"></i>
+                                    </span>
+                                    </div>
+                                    <span class="help-block" *ngIf="passwordValid">Passwords do not match</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span style="color: #dc3545">{{changePasswordError}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm btn-all-shadow waves-effect waves-light"
+                    (click)="closeModal()">Close
+            </button>
+            <button type="submit" class="btn btn-danger btn-sm btn-all-shadow waves-effect waves-light"
+                    (click)="submitChangePassword(!changePasswordForm.invalid)">Submit
+            </button>
+        </div>
+    </ng-template>

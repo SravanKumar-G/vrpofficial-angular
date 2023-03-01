@@ -1,0 +1,17 @@
+.input-group-append{
+  margin-right: -2.25rem;
+}
+.navbar{
+  display:inherit;
+}
+
+.app-search__input[type="search"]{
+  font-size: 11px;
+}
+
+.app-search__input::-webkit-input-placeholder {
+  font-size: 11px !important;
+}
+.app-search__input::-webkit-search-cancel-button{
+  padding-right: 12px;
+}

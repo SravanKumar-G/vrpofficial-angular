@@ -1,0 +1,41 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': submitted && f.phoneNumber.errors}" autofocus
+           class="form-control" formControlName="phoneNumber" maxlength="10" minlength="10"
+           name="phoneNumber"
+           placeholder="Mobile Number"
+           required
+           type="text">
+
+    <div *ngIf="(f.phoneNumber.invalid && (f.phoneNumber.touched || f.phoneNumber.dirty)) || submitted"
+         class="mt-1">
+      <span *ngIf="f.phoneNumber.errors?.required" class="text-danger">Mobile Number is required</span>
+      <span *ngIf="f.phoneNumber.errors?.pattern || f.phoneNumber.errors?.minlength"
+            class="text-danger">Mobile Number must be a 10 digit valid Number</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': submitted && f.password.errors}"
+           class="form-control" formControlName="password" id="password" name="password" placeholder="Password"
+           required
+           type="password">
+    <div *ngIf="f.password.invalid && (f.password.touched || f.password.dirty) || submitted">
+      <small *ngIf="f.password.errors?.required" class="text-danger">Password Required</small>
+      <small *ngIf="f.password.errors?.minlength" class="text-danger">Password should be minimum 6
+        characters</small>
+    </div>
+  </div>
+
+<!--  <div class="text-center">-->
+<!--    <span class="text-danger">{{error}}</span>-->
+<!--  </div>-->
+
+  <div class="text-center pt-4">
+    <button class="btn btn-primary" type="submit">Login</button>
+  </div>
+
+  <!--            <div class="text-center pt-3">-->
+  <!--              <a class="btn btn-link text-primary" href="#">Forgot Your Password?</a>-->
+  <!--            </div>-->
+</form>

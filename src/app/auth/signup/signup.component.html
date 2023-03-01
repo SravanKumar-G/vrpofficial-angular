@@ -1,0 +1,327 @@
+<form (ngSubmit)="onRegister()" [formGroup]="signUpForm" autocomplete="off" class="row">
+  <!--  User first name and last name-->
+  <div class="form-group col-sm-6 col-xs-12">
+    <div class="label-text form-check-label">First Name: <span class="mandatory-field">*</span></div>
+    <input [ngClass]="{'is-invalid': submitted && r.firstName.errors}" autofocus
+           class="form-control"
+           formControlName="firstName" id="firstName" name="firstName"
+           placeholder="First Name" required
+           type="text">
+    <div *ngIf="(r.firstName.invalid && (r.firstName.touched || r.firstName.dirty)) || submitted"
+         class="mt-1">
+      <span *ngIf="r.firstName.errors?.required" class="text-danger">First Name is required</span>
+    </div>
+  </div>
+  <div class="form-group col-sm-6 col-xs-12">
+    <div class="label-text form-check-label">Last Name: <span class="mandatory-field">*</span></div>
+    <input [ngClass]="{'is-invalid': submitted && r.lastName.errors}"
+           autofocus class="form-control"
+           formControlName="lastName" id="lastName" name="lastName"
+           placeholder="Last Name" required
+           type="text">
+    <div *ngIf="(r.lastName.invalid && (r.lastName.touched || r.lastName.dirty)) || submitted" class="mt-1">
+      <span *ngIf="r.lastName.errors?.required" class="text-danger">Last Name is required</span>
+    </div>
+  </div>
+
+  <!--  Father first name and last name-->
+  <div class="mb-1 col-12">Father Name</div>
+  <div class="form-group col-sm-6 col-xs-12">
+    <div class="label-text form-check-label">First Name: <span class="mandatory-field">*</span></div>
+    <input [ngClass]="{'is-invalid': submitted && r.fatherFirstName.errors}" autofocus
+           class="form-control"
+           formControlName="fatherFirstName" id="fatherFirstName" name="fatherFirstName"
+           placeholder="First Name" required
+           type="text">
+    <div *ngIf="(r.fatherFirstName.invalid && (r.fatherFirstName.touched || r.fatherFirstName.dirty)) || submitted"
+         class="mt-1">
+      <span *ngIf="r.fatherFirstName.errors?.required" class="text-danger">Father First Name is required</span>
+    </div>
+  </div>
+  <div class="form-group col-sm-6 col-xs-12">
+    <div class="label-text form-check-label">Last Name: <span class="mandatory-field">*</span></div>
+    <input [ngClass]="{'is-invalid': submitted && r.fatherLastName.errors}"
+           autofocus class="form-control"
+           formControlName="fatherLastName" id="fatherLastName" name="fatherLastName"
+           placeholder="Last Name" required
+           type="text">
+    <div *ngIf="(r.fatherLastName.invalid && (r.fatherLastName.touched || r.fatherLastName.dirty)) || submitted"
+         class="mt-1">
+      <span *ngIf="r.fatherLastName.errors?.required" class="text-danger">Father Last Name is required</span>
+    </div>
+  </div>
+
+  <!--  Mother first name and last name-->
+  <div class="mb-1 col-12">Mother Name</div>
+  <div class="form-group col-sm-6 col-xs-12">
+    <div class="label-text form-check-label">First Name: <span class="mandatory-field">*</span></div>
+    <input [ngClass]="{'is-invalid': submitted && r.motherFirstName.errors}" autofocus
+           class="form-control"
+           formControlName="motherFirstName" id="motherFirstName" name="motherFirstName"
+           placeholder="First Name" required
+           type="text">
+    <div *ngIf="(r.motherFirstName.invalid && (r.motherFirstName.touched || r.motherFirstName.dirty)) || submitted"
+         class="mt-1">
+      <span *ngIf="r.motherFirstName.errors?.required" class="text-danger">Mother First Name is required</span>
+    </div>
+  </div>
+  <div class="form-group col-sm-6 col-xs-12">
+    <div class="label-text form-check-label">Last Name: <span class="mandatory-field">*</span></div>
+    <input [ngClass]="{'is-invalid': submitted && r.motherLastName.errors}"
+           autofocus class="form-control"
+           formControlName="motherLastName" id="motherLastName" name="motherLastName"
+           placeholder="Last Name" required
+           type="text">
+    <div *ngIf="(r.motherLastName.invalid && (r.motherLastName.touched || r.motherLastName.dirty)) || submitted"
+         class="mt-1">
+      <span *ngIf="r.motherLastName.errors?.required" class="text-danger">Mother Last Name is required</span>
+    </div>
+  </div>
+
+  <div class="form-group col-sm-12 col-xs-12">
+    <div class="label-text form-check-label">Gender: <span class="mandatory-field">*</span></div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" formControlName="gender"
+             id="inlineRadio1" name="gender" type="radio"
+             value="Male">
+      <label class="form-check-label" for="inlineRadio1">Male</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" formControlName="gender"
+             id="inlineRadio2" name="gender" type="radio" value="Female">
+      <label class="form-check-label" for="inlineRadio2">Female</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" formControlName="gender"
+             id="inlineRadio3" name="gender" type="radio" value="Others">
+      <label class="form-check-label" for="inlineRadio3">Others</label>
+    </div>
+
+    <div *ngIf="(r.gender.invalid && (r.gender.touched || r.gender.dirty)) || submitted" class="mt-1">
+      <span *ngIf="r.gender.errors?.required" class="text-danger">Gender is required</span>
+    </div>
+  </div>
+
+  <div class="form-group col-sm-12 col-xs-12">
+    <div class="label-text form-check-label">Marital Status: <span class="mandatory-field">*</span></div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" formControlName="maritalStatus" id="inlineRadio4"
+             name="maritalStatus" type="radio" value="Married">
+      <label class="form-check-label" for="inlineRadio4">Married</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" formControlName="maritalStatus" id="inlineRadio5"
+             name="maritalStatus" type="radio" value="UnMarried">
+      <label class="form-check-label" for="inlineRadio5">Un Married</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" formControlName="maritalStatus" id="inlineRadio6"
+             name="maritalStatus" type="radio" value="Others">
+      <label class="form-check-label" for="inlineRadio6">Others</label>
+    </div>
+
+    <div *ngIf="(r.maritalStatus.invalid && (r.maritalStatus.touched || r.maritalStatus.dirty)) || submitted"
+         class="mt-1">
+      <span *ngIf="r.maritalStatus.errors?.required" class="text-danger">Marital Status is required</span>
+    </div>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12">
+    <div class="label-text form-check-label">Date of Birth: <span class="mandatory-field">*</span></div>
+    <div class="input-group">
+      <input #dp1="bsDatepicker"
+             [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-red', showTodayButton: true, todayPosition: 'center',  isAnimated: true }"
+             bsDatepicker
+             class="form-control"
+             formControlName="dateOfBirth"
+             name="date"
+             placeholder="Enter Date" type="text" />
+      <div class="input-group-append">
+        <button (click)="dp1.show()" [attr.aria-expanded]="dp1.isOpen"
+                class="btn btn-light btn-sm"
+                style="border: 1px solid #ced4da;"
+                type="button">
+          <i class="fa fa-calendar"></i>
+        </button>
+      </div>
+    </div>
+    <div *ngIf="(r.dateOfBirth.invalid && (r.dateOfBirth.touched || r.dateOfBirth.dirty)) || submitted" class="mt-1">
+      <span *ngIf="r.dateOfBirth.errors?.required" class="text-danger">Date of Birth is required</span>
+    </div>
+  </div>
+  <div class="form-group col-sm-6 col-xs-12">
+    <div class="label-text form-check-label">Mobile Number: <span class="mandatory-field">*</span></div>
+    <div class="input-group mb-1">
+      <input [ngClass]="{'is-invalid': submitted && r.phoneNumber.errors}" aria-describedby="basic-addon2"
+             aria-label="Mobile Number"
+             class="form-control"
+             formControlName="phoneNumber"
+             maxlength="10"
+             minlength="10" placeholder="Mobile Number" type="text">
+      <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="button">Verify</button>
+      </div>
+    </div>
+
+    <div *ngIf="(r.phoneNumber.invalid && (r.phoneNumber.touched || r.phoneNumber.dirty)) || submitted"
+         class="mt-1">
+      <span *ngIf="r.phoneNumber.errors?.required" class="text-danger">Mobile Number is required</span>
+      <span *ngIf="r.phoneNumber.errors?.pattern || r.phoneNumber.errors?.minlength"
+            class="text-danger">Mobile Number must be a 10 digit valid Number</span>
+    </div>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12">
+    <div class="label-text form-check-label">Email: <span class="mandatory-field">*</span></div>
+    <input [ngClass]="{'is-invalid': submitted && r.email.errors}"
+           autocomplete="off" class="form-control" formControlName="email" id="email" name="email"
+           placeholder="Email"
+           required type="email">
+    <div *ngIf="(r.email.invalid && (r.email.touched || r.email.dirty)) || submitted" class="mt-1">
+      <span *ngIf="r.email.errors?.required" class="text-danger">Email is required</span>
+      <span *ngIf="r.email.errors?.email"
+            class="text-danger">Please provide a valid Email</span>
+    </div>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12"></div>
+
+  <div class="form-group col-sm-6 col-xs-12">
+    <div class="label-text form-check-label">Password: <span class="mandatory-field">*</span></div>
+    <input [ngClass]="{'is-invalid': submitted && r.password.errors}" class="form-control" formControlName="password" id="password" name="password"
+           placeholder="Set a password"
+           required
+           type="password">
+    <div *ngIf="(r.password.invalid && (r.password.touched || r.password.dirty)) || submitted" class="mt-1">
+      <span *ngIf="r.password.errors?.required" class="text-danger">Password is required</span>
+      <span *ngIf="r.password.errors?.length"
+            class="text-danger">Password should be minimum 6 characters</span>
+    </div>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12">
+    <div class="label-text form-check-label">Confirm Password: <span class="mandatory-field">*</span></div>
+    <input [ngClass]="{'is-invalid': submitted && r.confirmPassword.errors}" class="form-control" formControlName="confirmPassword"
+           id="password-confirm"
+           name="password_confirmation" placeholder="Confirm password"
+           required
+           type="password">
+    <div *ngIf="(r.confirmPassword.invalid && (r.confirmPassword.touched || r.confirmPassword.dirty)) || submitted"
+         class="mt-1">
+      <span *ngIf="r.confirmPassword.errors?.required" class="text-danger">Confirm Password is required</span>
+      <span *ngIf="r.confirmPassword.errors?.length"
+            class="text-danger">Password should be minimum 6 characters</span>
+      <span *ngIf="r.confirmPassword.errors?.confirmPasswordValidator"
+            class="text-danger">Password and Confirm Password should be matched</span>
+    </div>
+  </div>
+
+  <div class="form-group col-12">
+      <div>Address</div>
+    <div class="row">
+      <div class="form-group col-sm-6 col-xs-12">
+        <div class="label-text form-check-label">State: <span class="mandatory-field">*</span></div>
+        <select class="form-control" formControlName="state">
+          <option selected value="">--Select State--</option>
+          <option value="AP">Andra Pradesh</option>
+          <option value="TG">Telangana</option>
+        </select>
+        <div *ngIf="(r.state.invalid && (r.state.touched || r.state.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.state.errors?.required" class="text-danger">State is required</span>
+        </div>
+      </div>
+      <div class="form-group col-sm-6 col-xs-12">
+        <div class="label-text form-check-label">District: <span class="mandatory-field">*</span></div>
+        <select class="form-control" formControlName="district">
+          <option selected value="">--Select State--</option>
+          <option value="AP">Andra Pradesh</option>
+          <option value="TG">Telangana</option>
+        </select>
+        <div *ngIf="(r.district.invalid && (r.district.touched || r.district.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.district.errors?.required" class="text-danger">District is required</span>
+        </div>
+      </div>
+      <div class="form-group col-sm-6 col-xs-12">
+        <div class="label-text form-check-label">Mandal: <span class="mandatory-field">*</span></div>
+        <select class="form-control" formControlName="mandal">
+          <option selected value="">--Select Mandal--</option>
+          <option value="AP">Andra Pradesh</option>
+          <option value="TG">Telangana</option>
+        </select>
+        <div *ngIf="(r.mandal.invalid && (r.mandal.touched || r.mandal.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.mandal.errors?.required" class="text-danger">Mandal is required</span>
+        </div>
+      </div>
+      <div class="form-group col-sm-6 col-xs-12">
+        <div class="label-text form-check-label">Constituency: <span class="mandatory-field">*</span></div>
+        <select class="form-control" formControlName="constituency">
+          <option selected value="">--Select Constituency--</option>
+          <option value="AP">Andra Pradesh</option>
+          <option value="TG">Telangana</option>
+        </select>
+        <div *ngIf="(r.constituency.invalid && (r.constituency.touched || r.constituency.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.constituency.errors?.required" class="text-danger">Constituency is required</span>
+        </div>
+      </div>
+      <div class="form-group col-sm-6 col-xs-12">
+        <div class="label-text form-check-label">Address: <span class="mandatory-field">*</span></div>
+        <textarea rows="4" class="form-control"  placeholder="enter address with H No"
+        formControlName="address"></textarea>
+        <div *ngIf="(r.address.invalid && (r.address.touched || r.address.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.address.errors?.required" class="text-danger">Address is required</span>
+        </div>
+      </div>
+      <div class="form-group col-sm-6 col-xs-12"></div>
+      <div class="form-group col-sm-6 col-xs-12">
+        <div class="label-text form-check-label">Employment Status: <span class="mandatory-field">*</span></div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" formControlName="employmentStatus" id="employmentStatus"
+                 name="employmentStatus" type="radio" value="Yes">
+          <label class="form-check-label" for="employmentStatus">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" formControlName="employmentStatus" id="employmentStatus1"
+                 name="employmentStatus" type="radio" value="No">
+          <label class="form-check-label" for="employmentStatus1">No</label>
+        </div>
+        <div *ngIf="(r.employmentStatus.invalid && (r.employmentStatus.touched || r.employmentStatus.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.employmentStatus.errors?.required" class="text-danger">Employment Status is required</span>
+        </div>
+      </div>
+      <div class="form-group col-sm-12 col-xs-12">
+        <div class="label-text form-check-label">Employment Type: <span class="mandatory-field">*</span></div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" formControlName="employmentType" id="employmentType1"
+                 name="employmentType" type="radio" value="govtEmp">
+          <label class="form-check-label" for="employmentType1">Government Employee</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" formControlName="employmentType" id="employmentType2"
+                 name="employmentType" type="radio" value="nonGovtEmp">
+          <label class="form-check-label" for="employmentType2">Non Government Employee</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" formControlName="employmentType" id="employmentType3"
+                 name="employmentType" type="radio" value="perEmp">
+          <label class="form-check-label" for="employmentType3">Permanent Employment</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" formControlName="employmentType" id="employmentType4"
+                 name="employmentType" type="radio" value="temEmp">
+          <label class="form-check-label" for="employmentType4">Temporarily Employment</label>
+        </div>
+        <div *ngIf="(r.employmentType.invalid && (r.employmentType.touched || r.employmentType.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.employmentType.errors?.required" class="text-danger">Employment Type is required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="form-group">
+    <span class="text-danger">{{error}}</span>
+  </div>
+
+  <div class="text-center pt-2 pb-1">
+    <button class="btn btn-primary" type="submit">Register</button>
+  </div>
+</form>

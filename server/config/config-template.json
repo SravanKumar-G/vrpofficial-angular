@@ -1,0 +1,25 @@
+{
+  "NODE_ENV": "development",
+  "env": "dev",
+  "jwt": {
+    "secret": "mysecret",
+    "options": {
+      "expiresIn": 86400
+    }
+  },
+  "mongo": {
+    "host": "127.0.0.1",
+    "database": "vrpofficial",
+    "username": "",
+    "password": "",
+    "port": 27107,
+    "url3": "?retryWrites=true&w=majority"
+  },
+
+  "port": 9999,
+  "baseUrl": "http://localhost:3000",
+  "fromMail": "test8688641425@gmail.com",
+  "mailPassword": "ksmaxoahjzzkload",
+  "toMail": "nikhilaree@gmail.com",
+  "toUserMail": "nikhil41425@gmail.com"
+}
