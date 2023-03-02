@@ -2032,3 +2032,9 @@ body {
     display: flex;
     justify-content: space-around;
 }
+.label-text{
+    font-weight: bold;
+}
+.mandatory-field{
+    color: red;
+}

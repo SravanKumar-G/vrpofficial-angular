@@ -188,7 +188,9 @@
 
   <div class="form-group col-sm-6 col-xs-12">
     <div class="label-text form-check-label">Password: <span class="mandatory-field">*</span></div>
-    <input [ngClass]="{'is-invalid': submitted && r.password.errors}" class="form-control" formControlName="password" id="password" name="password"
+    <input [ngClass]="{'is-invalid': submitted && r.password.errors}" class="form-control" formControlName="password"
+           id="password"
+           name="password"
            placeholder="Set a password"
            required
            type="password">
@@ -201,7 +203,8 @@
 
   <div class="form-group col-sm-6 col-xs-12">
     <div class="label-text form-check-label">Confirm Password: <span class="mandatory-field">*</span></div>
-    <input [ngClass]="{'is-invalid': submitted && r.confirmPassword.errors}" class="form-control" formControlName="confirmPassword"
+    <input [ngClass]="{'is-invalid': submitted && r.confirmPassword.errors}" class="form-control"
+           formControlName="confirmPassword"
            id="password-confirm"
            name="password_confirmation" placeholder="Confirm password"
            required
@@ -221,10 +224,9 @@
     <div class="row">
       <div class="form-group col-sm-6 col-xs-12">
         <div class="label-text form-check-label">State: <span class="mandatory-field">*</span></div>
-        <select class="form-control" formControlName="state">
+        <select class="form-control" formControlName="state" (change)="getDistrictsByStateId($event)">
           <option selected value="">--Select State--</option>
-          <option value="AP">Andra Pradesh</option>
-          <option value="TG">Telangana</option>
+          <option *ngFor="let state of states" value="{{state._id}}">{{state.name}}</option>
         </select>
         <div *ngIf="(r.state.invalid && (r.state.touched || r.state.dirty)) || submitted" class="mt-1">
           <span *ngIf="r.state.errors?.required" class="text-danger">State is required</span>
@@ -232,10 +234,9 @@
       </div>
       <div class="form-group col-sm-6 col-xs-12">
         <div class="label-text form-check-label">District: <span class="mandatory-field">*</span></div>
-        <select class="form-control" formControlName="district">
-          <option selected value="">--Select State--</option>
-          <option value="AP">Andra Pradesh</option>
-          <option value="TG">Telangana</option>
+        <select class="form-control" formControlName="district" (change)="getManContByDistId($event)">
+          <option selected value="">--Select District--</option>
+          <option *ngFor="let district of districts" value="{{district._id}}">{{district.name}}</option>
         </select>
         <div *ngIf="(r.district.invalid && (r.district.touched || r.district.dirty)) || submitted" class="mt-1">
           <span *ngIf="r.district.errors?.required" class="text-danger">District is required</span>
@@ -245,22 +246,10 @@
         <div class="label-text form-check-label">Mandal: <span class="mandatory-field">*</span></div>
         <select class="form-control" formControlName="mandal">
           <option selected value="">--Select Mandal--</option>
-          <option value="AP">Andra Pradesh</option>
-          <option value="TG">Telangana</option>
+          <option *ngFor="let mandal of mandals" value="{{mandal._id}}">{{mandal.name}}</option>
         </select>
         <div *ngIf="(r.mandal.invalid && (r.mandal.touched || r.mandal.dirty)) || submitted" class="mt-1">
           <span *ngIf="r.mandal.errors?.required" class="text-danger">Mandal is required</span>
-        </div>
-      </div>
-      <div class="form-group col-sm-6 col-xs-12">
-        <div class="label-text form-check-label">Constituency: <span class="mandatory-field">*</span></div>
-        <select class="form-control" formControlName="constituency">
-          <option selected value="">--Select Constituency--</option>
-          <option value="AP">Andra Pradesh</option>
-          <option value="TG">Telangana</option>
-        </select>
-        <div *ngIf="(r.constituency.invalid && (r.constituency.touched || r.constituency.dirty)) || submitted" class="mt-1">
-          <span *ngIf="r.constituency.errors?.required" class="text-danger">Constituency is required</span>
         </div>
       </div>
       <div class="form-group col-sm-6 col-xs-12">
@@ -271,7 +260,6 @@
           <span *ngIf="r.address.errors?.required" class="text-danger">Address is required</span>
         </div>
       </div>
-      <div class="form-group col-sm-6 col-xs-12"></div>
       <div class="form-group col-sm-6 col-xs-12">
         <div class="label-text form-check-label">Employment Status: <span class="mandatory-field">*</span></div>
         <div class="form-check form-check-inline">
@@ -288,6 +276,8 @@
           <span *ngIf="r.employmentStatus.errors?.required" class="text-danger">Employment Status is required</span>
         </div>
       </div>
+      <div class="form-group col-sm-6 col-xs-12"></div>
+
       <div class="form-group col-sm-12 col-xs-12">
         <div class="label-text form-check-label">Employment Type: <span class="mandatory-field">*</span></div>
         <div class="form-check form-check-inline">
@@ -314,14 +304,167 @@
           <span *ngIf="r.employmentType.errors?.required" class="text-danger">Employment Type is required</span>
         </div>
       </div>
+      <div class="form-group col-sm-6 col-xs-12">
+        <div class="label-text form-check-label">How many dependents on you?: <span class="mandatory-field">*</span></div>
+        <select class="form-control" formControlName="dependents">
+          <option selected value="">--Please select--</option>
+          <option *ngFor="let dependent of dependents" value="{{dependent.value}}">{{dependent.value}}</option>
+        </select>
+        <div *ngIf="(r.dependents.invalid && (r.dependents.touched || r.dependents.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.dependents.errors?.required" class="text-danger">Dependents is required</span>
+        </div>
+      </div>
+      <div class="form-group col-sm-12 col-xs-12">
+        <div class="label-text form-check-label">Are you interested in Politics?: <span class="mandatory-field">*</span></div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" formControlName="interestInPolitics" id="interestInPolitcs1"
+                 name="interestInPolitics" type="radio" value="Yes">
+          <label class="form-check-label" for="interestInPolitcs1">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" formControlName="interestInPolitics" id="interestInPolitcs2"
+                 name="interestInPolitics" type="radio" value="No">
+          <label class="form-check-label" for="interestInPolitcs2">No</label>
+        </div>
+        <div *ngIf="(r.interestInPolitics.invalid && (r.interestInPolitics.touched || r.interestInPolitics.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.interestInPolitics.errors?.required" class="text-danger">Field is required</span>
+        </div>
+      </div>
+      <div class="form-group col-sm-12 col-xs-12">
+        <div class="label-text form-check-label">Would you like contest in election?: <span class="mandatory-field">*</span></div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" formControlName="isContestInElection" id="isContestInElection1"
+                 name="isContestInElection" type="radio" value="Yes">
+          <label class="form-check-label" for="isContestInElection1">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" formControlName="isContestInElection" id="isContestInElection2"
+                 name="isContestInElection" type="radio" value="No">
+          <label class="form-check-label" for="isContestInElection2">No</label>
+        </div>
+        <div *ngIf="(r.isContestInElection.invalid && (r.isContestInElection.touched || r.isContestInElection.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.isContestInElection.errors?.required" class="text-danger">Field is required</span>
+        </div>
+      </div>
+<!--      <div class="form-group col-sm-12 col-xs-12">-->
+<!--          <div class="label-text form-check-label">If yes how would you like to contest in election ?: <span class="mandatory-field">*</span></div>-->
+<!--        <div class="form-check">-->
+<!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest1"-->
+<!--                 name="positionToContest" type="checkbox" value="MLA">-->
+<!--          <label class="form-check-label" for="isContestInElection1">MLA</label>-->
+<!--        </div>-->
+<!--        <div class="form-check">-->
+<!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest2"-->
+<!--                 name="positionToContest" type="checkbox" value="MP">-->
+<!--          <label class="form-check-label" for="isContestInElection2">MP</label>-->
+<!--        </div>-->
+<!--        <div class="form-check">-->
+<!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest3"-->
+<!--                 name="positionToContest" type="checkbox" value="MLC">-->
+<!--          <label class="form-check-label" for="positionToContest3">MLC</label>-->
+<!--        </div>-->
+<!--        <div class="form-check">-->
+<!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest4"-->
+<!--                 name="positionToContest" type="checkbox" value="CORPORATOR">-->
+<!--          <label class="form-check-label" for="positionToContest4">CORPORATOR</label>-->
+<!--        </div>-->
+<!--        <div class="form-check">-->
+<!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest5"-->
+<!--                 name="positionToContest" type="checkbox" value="COUNCELLOR">-->
+<!--          <label class="form-check-label" for="positionToContest5">COUNCELLOR</label>-->
+<!--        </div>-->
+<!--        <div class="form-check">-->
+<!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest6"-->
+<!--                 name="positionToContest" type="checkbox" value="SARPANCH">-->
+<!--          <label class="form-check-label" for="positionToContest6">SARPANCH</label>-->
+<!--        </div>-->
+<!--        <div class="form-check">-->
+<!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest7"-->
+<!--                 name="positionToContest" type="checkbox" value="OTHERS">-->
+<!--          <label class="form-check-label" for="positionToContest7">OTHERS</label>-->
+<!--        </div>-->
+<!--          <div *ngIf="(r.positionToContest.invalid && (r.positionToContest.touched || r.positionToContest.dirty)) || submitted" class="mt-1">-->
+<!--            <span *ngIf="r.positionToContest.errors?.required" class="text-danger">Field is required</span>-->
+<!--          </div>-->
+<!--      </div>-->
+      <div class="form-group col-sm-6 col-xs-12">
+        <div class="label-text form-check-label">If yes how would you like to contest in election ?: <span class="mandatory-field">*</span></div>
+        <select class="form-control" formControlName="positionToContest" multiple>
+          <option selected value="">--Select Positions--</option>
+          <option value="MP">MP</option>
+          <option value="MLA">MLA</option>
+          <option value="MLC">MLC</option>
+          <option value="CORPORATOR">CORPORATOR</option>
+          <option value="COUNCELLOR">COUNCELLOR</option>
+          <option value="SARPANCH">SARPANCH</option>
+          <option value="OTHERS">OTHERS</option>
+        </select>
+        <div *ngIf="(r.positionToContest.invalid && (r.positionToContest.touched || r.positionToContest.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.positionToContest.errors?.required" class="text-danger">Field is required</span>
+        </div>
+      </div>
+      <div class="form-group col-sm-6 col-xs-12">
+        <div class="label-text form-check-label">In which Constituency would you like to contest in election? <span class="mandatory-field">*</span></div>
+        <select class="form-control" formControlName="contestingConstituency">
+          <option selected value="">--Select Constituency--</option>
+          <option *ngFor="let constituency of constituencies" value="{{constituency._id}}">{{constituency.name}}</option>
+        </select>
+        <div *ngIf="(r.contestingConstituency.invalid && (r.contestingConstituency.touched || r.contestingConstituency.dirty)) || submitted" class="mt-1">
+          <span *ngIf="r.contestingConstituency.errors?.required" class="text-danger">Constituency is required</span>
+        </div>
+      </div>
+      <div class="form-group col-sm-12 col-xs-12">
+        <div class="label-text form-check-label">How would you like to contribute?</div>
+        <select class="form-control" formControlName="typeOfContribution" multiple>
+          <option selected value="">--Select Positions--</option>
+          <option value="1">Work in your community/mohalla</option>
+          <option value="2">Become a digital activist</option>
+          <option value="3">Join calling campaigns</option>
+          <option value="4">Attend party events</option>
+          <option value="5">IT support (coding)</option>
+          <option value="6">web design etc.</option>
+          <option value="7">Become a photo/video volunteer</option>
+          <option value="8">Provide housing to volunteers</option>
+          <option value="9">Content writing (mention preferred language below)</option>
+          <option value="10">Policy/Research support</option>
+          <option value="11">Others</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-12 col-xs-12">
+        <div class="label-text form-check-label">Would you like to tell us more about yourself ?</div>
+        <textarea class="form-control" formControlName="description" placeholder="enter about yourself" rows="5"></textarea>
+      </div>
+
     </div>
   </div>
 
   <div *ngIf="error" class="form-group">
     <span class="text-danger">{{error}}</span>
   </div>
-
-  <div class="text-center pt-2 pb-1">
-    <button class="btn btn-primary" type="submit">Register</button>
+  <div class="col-sm-12 form-group col-xs-12">
+    <div class="form-check">
+      <input class="form-check-input" formControlName="acceptConsent" id="acceptConsent"
+             name="positionToContest" type="checkbox" value="acceptConsent">
+      <label class="form-check-label label-text" for="acceptConsent">I hereby consent to receiving any communication from the party either in writing, electronically and/or in any audio-visual format via phone (including SMS/IVR), email and/or at my address.*</label>
+    </div>
+    <div *ngIf="(r.acceptConsent.invalid && (r.acceptConsent.touched || r.acceptConsent.dirty)) || submitted" class="mt-1">
+      <span *ngIf="r.acceptConsent.errors?.required" class="text-danger">Please check the 'consent' checkbox to 'Register'. </span>
+    </div>
+  </div>
+  <div class="col-sm-12 form-group col-xs-12">
+    <div class="form-check">
+      <input class="form-check-input" formControlName="acceptDeclaration" id="declaration"
+             name="declaration" type="checkbox" value="declaration">
+      <label class="form-check-label label-text" for="declaration">
+        I am above 18 years , and not enrolled as a government employee. I am not a member of any other political party registered with the Election Commission of India.
+        I am not a member with any organization whose views, policies or actions are in conflict with the objective of the party. I have not been convicted of any offense involving moral turpitude.*
+      </label>
+    </div>
+    <div *ngIf="(r.acceptDeclaration.invalid && (r.acceptDeclaration.touched || r.acceptDeclaration.dirty)) || submitted" class="mt-1">
+      <span *ngIf="r.acceptDeclaration.errors?.required" class="text-danger">Please check the 'Declaration' checkbox to 'Register'. </span>
+    </div>
+  </div>
+  <div class="text-center pt-2 pb-1 col-sm-12">
+    <button class="btn btn-danger w-100" type="submit">Register</button>
   </div>
 </form>

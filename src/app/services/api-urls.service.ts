@@ -18,5 +18,10 @@ export class ApiUrlsService {
   updateById ='/api/v1/user/updateUser/';
   deleteUser ='/api/v1/user/deleteUser/';
   updatePassword ='/api/v1/user/updatePassword';
+  getAllStates ='/api/v1/noauth/getStates';
+  getDistrictsByState ='/api/v1/noauth/getDistrictsByStateId/';
+  getMandalsByDistrict ='/api/v1/noauth/getMandalsByDistrict/';
+  getConstituenciesByDistrict ='/api/v1/noauth/getConstituenciesByDistrict/';
+  getAllConstituencies ='/api/v1/noauth/getAllConstituencies/';
 
 }

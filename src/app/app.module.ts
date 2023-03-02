@@ -4,7 +4,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgSelectModule} from "@ng-select/ng-select";
 import { LayoutComponent } from './layout/layout.component';
@@ -25,7 +24,6 @@ import { NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     LayoutComponent,
     SignupComponent,
     SpinnerComponent,
