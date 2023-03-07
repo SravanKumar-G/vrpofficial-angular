@@ -5,233 +5,385 @@
             <p></p>
         </div>
         <ul class="app-breadcrumb breadcrumb">
-            <li class="breadcrumb-item"><a class="fa fa-home fa-lg breadcrumb-home-link" (click)="goToDashboard()"></a></li>
+            <li class="breadcrumb-item"><a (click)="goToDashboard()" class="fa fa-home fa-lg breadcrumb-home-link"></a>
+            </li>
             <li class="breadcrumb-item"><a href="#">Users</a></li>
         </ul>
     </div>
-<!--    <div class="row">-->
-<!--        <div class="col-sm-1 offset-11 text-right form-group mt-3 mb-3">-->
-<!--            <button class="btn btn-sm btn-primary" (click)="addUser()">Add User</button>-->
-<!--        </div>-->
-<!--    </div>-->
+    <!--    <div class="row">-->
+    <!--        <div class="col-sm-1 offset-11 text-right form-group mt-3 mb-3">-->
+    <!--            <button class="btn btn-sm btn-primary" (click)="addUser()">Add User</button>-->
+    <!--        </div>-->
+    <!--    </div>-->
     <div class="row">
-        <div class="col-md-12" >
+        <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
-<!--                        <div class="row">-->
-<!--                            <div class="col-sm-1 offset-11 text-right form-group mt-3 mb-3">-->
-<!--                                <button class="btn btn-sm btn-primary" (click)="addUser()">Add User</button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-                            <div class="table-responsive">
-                                <table class="table table-hover custom-table">
-                                    <thead class="thead-dark">
-                                    <tr class="text-left">
-                                        <th>S.No</th>
-                                        <th scope="col">Full Name</th>
-                                        <th scope="col">Phone Number</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Role</th>
-                                        <th scope="col">Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr *ngFor="let user of listOfAllUsers; let i = index">
-                                        <td>{{i + 1}}</td>
-                                        <td>{{user.firstName + ' ' + user.lastName}}</td>
-                                        <td>{{user.phoneNumber}}</td>
-                                        <td>{{user.email}}</td>
-                                        <td>{{apiService.getRoleName(user.role)}}</td>
-                                        <td>{{user.status}}</td>
-                                        <td>
-<!--                                            <button class="btn btn-sm btn-success"-->
-<!--                                                    (click)="editUser(user._id)" title="Edit User">-->
-<!--                                                <i class="fa fa-pencil fa-1x" aria-hidden="true"></i>-->
-<!--                                            </button>-->
-                                            <button class="btn btn-sm btn-danger ml-1"
-                                                    (click)="deleteUser(user._id)" title="Delete User">
-                                                <i class="fa fa-trash fa-1x" aria-hidden="true"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-danger ml-1"
-                                                    (click)="resetPass(user._id)" title="reset password">
-                                                <i class="fa fa-key" aria-hidden="true"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div class="row  mt-3 mb-3">
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" placeholder="search by mobile number"
+                                   [(ngModel)]="query.phoneNumber"
+                                   [ngModelOptions]="{standalone: true}" />
                         </div>
+                        <div class="col-sm-2">
+                            <select class="form-control" [(ngModel)]="query.state"
+                                    [ngModelOptions]="{standalone: true}" (ngModelChange)="getAllDistricts(query.state)">
+                                <option selected value="">--Select State--</option>
+                                <option *ngFor="let state of states" value="{{state._id}}">{{state.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select class="form-control" [(ngModel)]="query.district"
+                                    [ngModelOptions]="{standalone: true}" (ngModelChange)="getAllMandals(query.district)">
+                                <option selected value="">--Select District--</option>
+                                <option *ngFor="let district of districts" value="{{district._id}}">{{district.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select class="form-control" [(ngModel)]="query.mandal"
+                                    [ngModelOptions]="{standalone: true}">
+                                <option selected value="">--Select Mandal--</option>
+                                <option *ngFor="let mandal of mandals" value="{{mandal._id}}">{{mandal.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 mt-auto mb-auto">
+                            <button (click)="getAllUser()" class="btn btn-sm btn-success">Search</button>
+                            <button (click)="resetFilters()" class="btn btn-sm btn-danger ml-2">Reset</button>
+                        </div>
+                        <div class="col-sm-1 offset-1 mt-auto mb-auto">
+                            <button (click)="downloadExcel()" class="btn btn-sm btn-primary">Download Excel</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover custom-table">
+                            <thead class="thead-dark">
+                            <tr class="text-left">
+                                <th>S.No</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Father Name</th>
+                                <th scope="col">Mother Name</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">State</th>
+                                <th scope="col">District</th>
+                                <th scope="col">Mandal</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let user of listOfAllUsers; let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>{{user.firstName + ' ' + user.lastName}}</td>
+                                <td>{{user.fatherFirstName + ' ' + user.fatherLastName}}</td>
+                                <td>{{user.motherFirstName + ' ' + user.motherLastName}}</td>
+                                <td>{{user.phoneNumber}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.state}}</td>
+                                <td>{{user.district}}</td>
+                                <td>{{user.mandal}}</td>
+                                <!--                                <td>{{apiService.getRoleName(user.role)}}</td>-->
+                                <td>
+                                    <!--                                            <button class="btn btn-sm btn-success"-->
+                                    <!--                                                    (click)="editUser(user._id)" title="Edit User">-->
+                                    <!--                                                <i class="fa fa-pencil fa-1x" aria-hidden="true"></i>-->
+                                    <!--                                            </button>-->
+                                    <button (click)="deleteUser(user._id)"
+                                            class="btn btn-sm btn-primary ml-1" title="Delete User">
+                                        <i aria-hidden="true" class="fa fa-trash fa-1x"></i>
+                                    </button>
+                                    <button (click)="resetPass(user._id)"
+                                            class="btn btn-sm btn-danger ml-1" title="reset password">
+                                        <i aria-hidden="true" class="fa fa-key"></i>
+                                    </button>
+                                    <button (click)="viewUserDetails(user)"
+                                            class="btn btn-sm btn-success ml-1" title="View User Details">
+                                        <i aria-hidden="true" class="fa fa-envelope"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr *ngIf="listOfAllUsers.length === 0">
+                                <td colspan="10">No Data found</td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <table class="table d-none" id="excelDownload">
+                            <thead>
+                            <tr>
+                                <th>S No</th>
+                                <th>Name</th>
+                                <th>Father Name</th>
+                                <th>Mother Name</th>
+                                <th>Gender</th>
+                                <th>Marital Status</th>
+                                <th>Date of Birth</th>
+                                <th>Mobile Number</th>
+                                <th>Email</th>
+                                <th>State</th>
+                                <th>District</th>
+                                <th>Mandal</th>
+                                <th>Address</th>
+                                <th>Employment Status</th>
+                                <th>Employment Type</th>
+                                <th>Dependents</th>
+                                <th>Interested in Politics</th>
+                                <th>Contest in Election</th>
+                                <th>If yes how would you like to contest in election ?</th>
+                                <th>In which Constituency would you like to contest in election?</th>
+                                <th>How would you like to contribute?</th>
+                                <th>About yourself</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let data of listOfAllUsers; let i = index;">
+                                <td>{{i + 1}}</td>
+                                <td>{{data.firstName + ' ' + data.lastName}}</td>
+                                <td>{{data.fatherFirstName + ' ' + data.fatherLastName}}</td>
+                                <td>{{data.motherFirstName + ' ' + data.motherLastName}}</td>
+                                <td>{{data.gender}}</td>
+                                <td>{{data.maritalStatus}}</td>
+                                <td>{{data.dateOfBirth}}</td>
+                                <td>{{data.phoneNumber}}</td>
+                                <td>{{data.email}}</td>
+                                <td>{{data.state}}</td>
+                                <td>{{data.district}}</td>
+                                <td>{{data.mandal}}</td>
+                                <td>{{data.address}}</td>
+                                <td>{{data.employmentStatus}}</td>
+                                <td>{{apiService.getEmpType(data.employmentType)}}</td>
+                                <td>{{data.dependents}}</td>
+                                <td>{{data.interestInPolitics}}</td>
+                                <td>{{data.isContestInElection}}</td>
+                                <td>{{data.positionToContest}}</td>
+                                <td>{{data.contestingConstituency}}</td>
+                                <td>
+                                    <ul>
+                                        <li *ngFor="let data of data.typeOfContribution">{{apiService.getContr(data)}}</li>
+                                        ,
+                                    </ul>
+                                </td>
+                                <td>{{data.description}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-<!--    <ng-template #addUserModal let-c="close" let-d="dismiss">-->
-<!--        <div class="modal-header">-->
-<!--            <h4 class="modal-title">{{userId ? 'Edit User' : 'Add User'}}</h4>-->
-<!--        </div>-->
-<!--        <div class="modal-body">-->
-<!--            <div class="tile">-->
-<!--                <div class="tile-body">-->
-<!--                    <div class="row" style="align-items: center">-->
-<!--                        <div class="col-sm-6 form-group">-->
-<!--                            <label class="control-label">First Name<span class="mandatory-field">*</span></label>-->
-<!--                            <input class="form-control form-control-sm" placeholder="First Name"-->
-<!--                                   maxlength="10" minlength="10"-->
-<!--                                   [(ngModel)]="data.firstName"-->
-<!--                                   [ngModelOptions]="{standalone: true}">-->
-<!--                        </div>-->
-<!--                        <div class="col-sm-6 form-group">-->
-<!--                            <label class="control-label">Last Name<span class="mandatory-field">*</span></label>-->
-<!--                            <input class="form-control form-control-sm" placeholder="Last Name"-->
-<!--                                   maxlength="10" minlength="10"-->
-<!--                                   [(ngModel)]="data.lastName"-->
-<!--                                   [ngModelOptions]="{standalone: true}">-->
-<!--                        </div>-->
-<!--                        <div class="col-sm-6 form-group">-->
-<!--                            <label class="control-label">Phone Number<span class="mandatory-field">*</span></label>-->
-<!--                            <input class="form-control form-control-sm" placeholder=" Enter Phone Number"-->
-<!--                                   maxlength="10" minlength="10"-->
-<!--                                   [(ngModel)]="data.phoneNumber"-->
-<!--                                   [ngModelOptions]="{standalone: true}">-->
-<!--                        </div>-->
-<!--                        <div class="col-sm-6 form-group" [hidden]="userId">-->
-<!--                            <label class="control-label">Password<span class="mandatory-field">*</span></label>-->
-<!--                            <input type="password" class="form-control form-control-sm" placeholder=" Enter Password"-->
-<!--                                   minlength="6"-->
-<!--                                   [(ngModel)]="data.password"-->
-<!--                                   [ngModelOptions]="{standalone: true}">-->
-<!--                        </div>-->
-<!--                        <div class="col-sm-6 form-group">-->
-<!--                            <label class="control-label">E-mail<span class="mandatory-field">*</span></label>-->
-<!--                            <input type="email" class="form-control form-control-sm" placeholder=" Enter email"-->
-<!--                                   [(ngModel)]="data.email"-->
-<!--                                   [ngModelOptions]="{standalone: true}">-->
-<!--                        </div>-->
-<!--                        <div class="col-sm-6 form-group">-->
-<!--                            <label class="control-label">Select Role<span class="mandatory-field">*</span></label>-->
-<!--                            <select class="form-control form-control-sm"-->
-<!--                                    [(ngModel)]="data.role" [ngModelOptions]="{standalone: true}">-->
-<!--                                <option value="" selected>Select Role</option>-->
-<!--                                <option value="5">User</option>-->
-<!--                                <option value="30">Admin</option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-<!--                        <div class="col-sm-6 form-group">-->
-<!--                            <label class="control-label">Select Status<span class="mandatory-field">*</span></label>-->
-<!--                            <select class="form-control form-control-sm"-->
-<!--                                    [(ngModel)]="data.status" [ngModelOptions]="{standalone: true}">-->
-<!--                                <option value="" selected>Select Status</option>-->
-<!--                                <option value="true">True</option>-->
-<!--                                <option value="false">False</option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <ul>-->
-<!--                            <li *ngFor="let error of errors" class="text-danger">-->
-<!--                                {{error}}-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="modal-footer">-->
-<!--            <button type="button" class="btn btn-success btn-sm SaveSiteLogins"-->
-<!--                    (click)="saveUser()">{{userId ? 'Update' : 'Save'}}</button>&nbsp;&nbsp;-->
-<!--            <button type="button" class="btn btn-sm btn-all-shadow waves-effect waves-light btn-danger"-->
-<!--                    (click)="close()">Close-->
-<!--            </button>-->
-<!--        </div>-->
-<!--    </ng-template>-->
-    <ng-template #resetPasswordModal let-c="close" let-d="dismiss">
-        <div class="modal-header">
-            <h6 class="modal-title form-head-line-style" style="text-transform: capitalize;">
-                <i class="fa fa-key fa-1x" aria-hidden="true"></i>
-                Change Password
-                <b><u>({{userName}})</u></b>
-            </h6>
+<ng-template #viewUserDetailsModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title"><b><u><i>{{userName}}</i></u></b> details</h4>
+        <span (click)="close()" title="Close Dialog">
+            <span style="background: red;
+    padding: 5px 7px;
+    border-radius: 100%;
+    color: #fff;"><i class="fa fa-close"></i></span>
+        </span>
+    </div>
+    <div class="modal-body">
+        <div class="tile">
+            <div class="tile-body view-details">
+                <div class="row" style="align-items: center">
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">First Name</label>
+                        <p>{{data.firstName}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Last Name</label>
+                        <p>{{data.lastName}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Father First Name</label>
+                        <p>{{data.fatherFirstName}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Father Last Name</label>
+                        <p>{{data.fatherLastName}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Mother First Name</label>
+                        <p>{{data.motherFirstName}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Mother Last Name</label>
+                        <p>{{data.motherLastName}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Mobile Number</label>
+                        <p>{{data.phoneNumber}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Email</label>
+                        <p>{{data.email}}</p>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">DOB</label>
+                        <p>{{data.dateOfBirth | date}}</p>
+                    </div>
+                    <div class="col-sm-4  form-group">
+                        <label class="control-label">Gender</label>
+                        <p>{{data.gender}}</p>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Marital Status</label>
+                        <p>{{data.maritalStatus}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">State</label>
+                        <p>{{data.state || 'NA'}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">District</label>
+                        <p>{{data.district || 'NA'}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Mandal</label>
+                        <p>{{data.mandal || 'NA'}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Address</label>
+                        <p>{{data.address || 'NA'}}</p>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Employment Status</label>
+                        <p>{{data.employmentStatus || 'NA'}}</p>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Employment Type</label>
+                        <p>{{apiService.getEmpType(data.employmentType)}}</p>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Dependents</label>
+                        <p>{{data.dependents || 'NA'}}</p>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Interest in Politics ?</label>
+                        <p>{{data.interestInPolitics || 'NA'}}</p>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Contest in Election ?</label>
+                        <p>{{data.isContestInElections || 'NA'}}</p>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Election Type</label>
+                        <p><span *ngFor="let data of data.positionToContest">{{data || 'NA'}},</span></p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Contesting Constituency</label>
+                        <p>{{data.contestingConstituency || 'NA'}}</p>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Description</label>
+                        <p>{{data.description || 'NA'}}</p>
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label class="control-label">Contribution</label>
+                        <ul>
+                            <li *ngFor="let data of data.typeOfContribution">{{apiService.getContr(data) || 'NA'}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!--    <modal-content>-->
-        <div class="modal-body">
-            <form [formGroup]="changePasswordForm" (ngSubmit)="submitChangePassword(changePasswordForm.invalid)">
-                <div class="tile">
-                    <div class="tile-body fields-up text-left">
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <label class="control-label">PASSWORD <b class="mandatory-field">*</b></label>
-                                <div class="has-feedback"
-                                     [ngClass]="{ 'has-error' : changePasswordForm.controls['password'].invalid &&
-                                         !changePasswordForm.controls['password'].pristine && changePasswordForm.controls['password'].dirty, 'has-success' : changePasswordForm.controls['password'].valid && !changePasswordForm.controls['password'].pristine}">
-                                    <div class="input-group mb-3">
-                                        <input type="{{showAndHideText}}" class="form-control form-control-bottom"
-                                               id="password"
-                                               name="password"
-                                               placeholder="Enter New Password"
-                                               autocomplete="off"
-                                               [(ngModel)]="changePassword.password"
-                                               formControlName="password"
-                                               [minLength]="6" required
-                                               (ngModelChange)="confirmPasswordC(changePassword.password,changePassword.confirmPassword)">
-                                        <span class="input-group-text" id="basic-addon1"
-                                              (click)="showAndHidePassword(!isTrue, 'Password')">
+    </div>
+    <div class="modal-footer">
+        <button (click)="close()" class="btn btn-sm btn-all-shadow waves-effect waves-light btn-danger"
+                type="button">Close
+        </button>
+    </div>
+</ng-template>
+<ng-template #resetPasswordModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h6 class="modal-title form-head-line-style" style="text-transform: capitalize;">
+            <i aria-hidden="true" class="fa fa-key fa-1x"></i>
+            Change Password
+            <b><u>({{userName}})</u></b>
+        </h6>
+    </div>
+    <!--    <modal-content>-->
+    <div class="modal-body">
+        <form (ngSubmit)="submitChangePassword(changePasswordForm.invalid)" [formGroup]="changePasswordForm">
+            <div class="tile">
+                <div class="tile-body fields-up text-left">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label class="control-label">PASSWORD <b class="mandatory-field">*</b></label>
+                            <div [ngClass]="{ 'has-error' : changePasswordForm.controls['password'].invalid &&
+                                         !changePasswordForm.controls['password'].pristine && changePasswordForm.controls['password'].dirty, 'has-success' : changePasswordForm.controls['password'].valid && !changePasswordForm.controls['password'].pristine}"
+                                 class="has-feedback">
+                                <div class="input-group mb-3">
+                                    <input (ngModelChange)="confirmPasswordC(changePassword.password,changePassword.confirmPassword)"
+                                           [(ngModel)]="changePassword.password"
+                                           [minLength]="6"
+                                           autocomplete="off"
+                                           class="form-control form-control-bottom"
+                                           formControlName="password"
+                                           id="password"
+                                           name="password"
+                                           placeholder="Enter New Password" required
+                                           type="{{showAndHideText}}">
+                                    <span (click)="showAndHidePassword(!isTrue, 'Password')" class="input-group-text"
+                                          id="basic-addon1">
                                         <i *ngIf="isTrue" class="fa fa-eye"></i>
                                         <i *ngIf="!isTrue" class="fa fa-eye-slash"></i>
                                     </span>
-                                    </div>
-                                    <span class="help-block"
-                                          *ngIf="changePasswordForm.controls['password'].invalid && changePasswordForm.controls['password'].dirty">
+                                </div>
+                                <span *ngIf="changePasswordForm.controls['password'].invalid && changePasswordForm.controls['password'].dirty"
+                                      class="help-block">
                                 Please Enter at least 6 characters</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <label for="ConfirmPassword" class="control-label">CONFIRM PASSWORD <b
-                                        class="mandatory-field">*</b></label>
-                                <div class="has-feedback"
-                                     [ngClass]="{ 'has-error' : changePasswordForm.controls['confirmPassword'].invalid &&
-                                         !changePasswordForm.controls['confirmPassword'].pristine && changePasswordForm.controls['confirmPassword'].dirty, 'has-success' : changePasswordForm.controls['confirmPassword'].valid && !changePasswordForm.controls['confirmPassword'].pristine}">
-                                    <div class="input-group mb-3">
-                                        <input type="{{ConfirmPasswordShowAndHideText}}"
-                                               class="form-control form-control-bottom"
-                                               id="confirmPassword"
-                                               name="confirmPassword"
-                                               placeholder="Confirm New Password"
-                                               [(ngModel)]="changePassword.confirmPassword"
-                                               autocomplete="off"
-                                               formControlName="confirmPassword"
-                                               [minLength]="6" required
-                                               (ngModelChange)="confirmPasswordC(changePassword.password,changePassword.confirmPassword)">
-                                        <span class="input-group-text" id="basic-addon2"
-                                              (click)="showAndHidePassword(!isTrueConfirm, 'Confirm')">
-                                        <i *ngIf="isTrueConfirm" class="fa fa-eye"></i>
-                                        <i *ngIf="!isTrueConfirm" class="fa fa-eye-slash"></i>
-                                    </span>
-                                    </div>
-                                    <span class="help-block" *ngIf="passwordValid">Passwords do not match</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <span style="color: #dc3545">{{changePasswordError}}</span>
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label class="control-label" for="ConfirmPassword">CONFIRM PASSWORD <b
+                                    class="mandatory-field">*</b></label>
+                            <div [ngClass]="{ 'has-error' : changePasswordForm.controls['confirmPassword'].invalid &&
+                                         !changePasswordForm.controls['confirmPassword'].pristine && changePasswordForm.controls['confirmPassword'].dirty, 'has-success' : changePasswordForm.controls['confirmPassword'].valid && !changePasswordForm.controls['confirmPassword'].pristine}"
+                                 class="has-feedback">
+                                <div class="input-group mb-3">
+                                    <input (ngModelChange)="confirmPasswordC(changePassword.password,changePassword.confirmPassword)"
+                                           [(ngModel)]="changePassword.confirmPassword"
+                                           [minLength]="6"
+                                           autocomplete="off"
+                                           class="form-control form-control-bottom"
+                                           formControlName="confirmPassword"
+                                           id="confirmPassword"
+                                           name="confirmPassword"
+                                           placeholder="Confirm New Password" required
+                                           type="{{ConfirmPasswordShowAndHideText}}">
+                                    <span (click)="showAndHidePassword(!isTrueConfirm, 'Confirm')"
+                                          class="input-group-text"
+                                          id="basic-addon2">
+                                        <i *ngIf="isTrueConfirm" class="fa fa-eye"></i>
+                                        <i *ngIf="!isTrueConfirm" class="fa fa-eye-slash"></i>
+                                    </span>
+                                </div>
+                                <span *ngIf="passwordValid" class="help-block">Passwords do not match</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span style="color: #dc3545">{{changePasswordError}}</span>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm btn-all-shadow waves-effect waves-light"
-                    (click)="closeModal()">Close
-            </button>
-            <button type="submit" class="btn btn-danger btn-sm btn-all-shadow waves-effect waves-light"
-                    (click)="submitChangePassword(!changePasswordForm.invalid)">Submit
-            </button>
-        </div>
-    </ng-template>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button (click)="closeModal()" class="btn btn-secondary btn-sm btn-all-shadow waves-effect waves-light"
+                type="button">Close
+        </button>
+        <button (click)="submitChangePassword(!changePasswordForm.invalid)"
+                class="btn btn-danger btn-sm btn-all-shadow waves-effect waves-light"
+                type="submit">Submit
+        </button>
+    </div>
+</ng-template>

@@ -31,7 +31,6 @@ export class AuthService {
     return this.http.post<any>(this.apiUrls.mainUrl + '/api/v1/auth/login', {phoneNumber, password})
       .pipe(map(response => {
         if (response) {
-          console.log(response);
           localStorage.setItem('loggedInOMSUser', JSON.stringify(response));
           this.currentUserSubject.next(response);
         }

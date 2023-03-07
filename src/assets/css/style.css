@@ -134,7 +134,7 @@ body {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    background-color: #db2b30;
+    background-color: #166294;
     z-index: 1030;
     padding-right: 15px;
 }
@@ -151,7 +151,7 @@ body {
     }
 }
 .logOut-dropdown {
-    background-image: linear-gradient(to right, rgba(255, 0, 0, 0), #a11c20);
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0), #093c83);
     border-bottom-right-radius: 100px;
     border-top-right-radius: 100px;
 }
@@ -226,7 +226,8 @@ body {
         flex: 0 0 auto;
         display: block;
         width: 230px;
-        background-color: #7e1619;
+        /*background-color: #7e1619;*/
+        background-color: rgb(0 123 255 / 25%);
     }
 }
 
@@ -2037,4 +2038,15 @@ body {
 }
 .mandatory-field{
     color: red;
+}
+.view-details label{
+    margin: 0 !important;
+    font-weight: 300;
+}
+.view-details p {
+    margin: 0;
+    padding: 5px;
+    background: #f5f5f5;
+    color: #000;
+    font-weight: 600;
 }

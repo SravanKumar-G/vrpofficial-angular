@@ -13,7 +13,7 @@ module.exports = router;
 
 router.post('/register', asyncHandler(register));
 router.post('/login', passport.authenticate('local', { session: false }),  login);
-router.get('/me', passport.authenticate('jwt', { session: true }), login);
+router.get('/me', passport.authenticate('jwtLogin', { session: true }), login);
 
 async function register(req, res, next) {
   try {

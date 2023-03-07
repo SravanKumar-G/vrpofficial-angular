@@ -10,6 +10,18 @@ router.route('/getStates').get(function (req, res) {
     });
 });
 
+router.route('/getAllDistricts').get(function (req, res) {
+    noAuthController.getAllDistricts(result => {
+        res.status(result.status).json(result);
+    });
+});
+
+router.route('/getAllMandals').get(function (req, res) {
+    noAuthController.getAllMandals(result => {
+        res.status(result.status).json(result);
+    });
+});
+
 router.route('/getDistrictsByStateId/:stateId').get(function (req, res) {
     noAuthController.getDistrictsByState(req.params.stateId, result => {
         res.status(result.status).json(result);

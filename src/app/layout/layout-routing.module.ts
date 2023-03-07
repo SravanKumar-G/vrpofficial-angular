@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {LayoutComponent} from "@app/layout/layout.component";
 import {AuthGuard} from "@app/guards/auth.guard";
 import {DashboardComponent} from "@app/layout/components/dashboard/dashboard.component";
+import {UserProfileComponent} from "@app/layout/components/user-profile/user-profile.component";
 
 const routes: Routes = [
   {
@@ -22,6 +23,12 @@ const routes: Routes = [
         data: {expectedRole: [30]},
         loadChildren: () => import('./components/users/users.module')
             .then(m => m.UsersModule)
+      },
+      {
+        path: 'user-profile',
+        canActivate: [AuthGuard],
+        data: {expectedRole: [5]},
+        component: UserProfileComponent
       },
       {
         path: 'dashboard',

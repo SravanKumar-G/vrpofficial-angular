@@ -10,7 +10,6 @@ const config = require("./config");
 const localLogin = new LocalStrategy({ usernameField: "phoneNumber" },
   async (phoneNumber, password, done) => {
     let user = await UserColl.findOne({ phoneNumber });
-    console.log(user);
     if (!user) {
       done({
         status: 400,
@@ -18,7 +17,6 @@ const localLogin = new LocalStrategy({ usernameField: "phoneNumber" },
       });
     } else {
       try {
-        console.log(bcrypt.compareSync(password, user.password));
         if (bcrypt.compareSync(password, user.password)) {
           user = user.toObject();
           delete user.password;
@@ -37,7 +35,7 @@ const localLogin = new LocalStrategy({ usernameField: "phoneNumber" },
 const jwtLogin = new JwtStrategy(
   {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: config.jwtSecret
+    secretOrKey: 'mysecret'
   },
   async (payload, done) => {
     let user = await UserColl.findById(payload._id);

@@ -6,32 +6,30 @@ import {
   HttpRequest,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import {Router} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Injectable()
 export class CatchErrorInterceptor implements HttpInterceptor {
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private router: Router) {}
 
   intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
+      request: HttpRequest<any>,
+      next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(catchError(this.showSnackBar));
+    return next.handle(request).pipe(catchError(err => {
+      console.log(err);
+      if (err.status === 401) {
+        // auto logout if 401 response returned from api
+            localStorage.clear();
+            this.router.navigate(['/login']);
+            Swal.fire('Error', 'Session timed out..!, please login again to continue', 'error')
+      }
+      const error = err.error || err.statusText;
+      return throwError(error);
+    }));
   }
-
-  private showSnackBar = (response: HttpErrorResponse): Observable<never> => {
-    const text: string | undefined =
-      response.error?.message ?? response.error.statusText;
-
-    if (text) {
-      this.snackBar.open(text, 'Close', {
-        duration: 2000,
-      });
-    }
-
-    return throwError(() => response);
-  };
 }

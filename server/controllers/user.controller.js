@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const Joi = require("joi");
 const UserColl = require("../models/user.model");
+const StateColl = require("../models/states.model");
+const DistColl = require("../models/districts.model");
+const MandalColl = require("../models/mandals.model");
+const ConstColl = require("../models/constituencies.model");
 
 const userSchema = Joi.object({
   firstName: Joi.string().required(),
@@ -32,13 +36,21 @@ exports.addUser = async (body, next) => {
 
 exports.getAllUsers = async (req, next) => {
   try {
-    console.log('re', req);
-    let query = {};
+    let query = {status: false};
     const pageNumber = req.page || 0;
     const limit = req.count || 10;
     const result = {};
     if (req.phoneNumber) {
-      query.phoneNumber = { "phoneNumber": { $regex: new RegExp("^" + req.phoneNumber, "i") } };
+      query.phoneNumber =  req.phoneNumber ;
+    }
+    if (req.state) {
+      query.state = req.state ;
+    }
+    if (req.district) {
+      query.district =  req.district ;
+    }
+    if (req.mandal) {
+      query.mandal = req.mandal;
     }
     const total = await UserColl.countDocuments(query).exec();
     let startIndex = (pageNumber - 1) * limit;
@@ -47,6 +59,9 @@ exports.getAllUsers = async (req, next) => {
       .skip(startIndex)
       .limit(limit)
       .exec();
+    for (let i =0; i < result.data.length; i++) {
+        await populateName(result.data[i]);
+    }
     result.count = limit;
     result.total = total;
     result.page = pageNumber;
@@ -61,7 +76,7 @@ exports.updateUser = async (userId, body, updatedBy, res) => {
   try {
     body.updatedBy = updatedBy.toString();
     let user = await UserColl.updateOne({ _id: ObjectId(userId) }, { $set: body });
-    return res({ status: 200, message: user });
+    return res({ status: 200, message: 'User details updated successfully..!' });
   } catch (err) {
     return res({ status: 500, message: err });
   }
@@ -70,8 +85,34 @@ exports.updateUser = async (userId, body, updatedBy, res) => {
 exports.getUserById = async (userId, next) => {
   try {
     const data = await UserColl.findOne({ _id: ObjectId(userId) });
-    next({ status: 200, data: data });
+    delete data.password;
+    // console.log(finalData);
+    next({ status: 200, data });
   } catch (err) {
+    console.log(err);
+    next({ status: 500, message: err });
+  }
+}
+
+exports.viewUserDetails = async (userId, next) => {
+  try {
+    const data = await UserColl.findOne({ _id: ObjectId(userId) });
+    delete data.password;
+    const finalData = await populateName(data);
+    // console.log(finalData);
+    next({ status: 200, data:finalData });
+  } catch (err) {
+    console.log(err);
+    next({ status: 500, message: err });
+  }
+}
+
+exports.deleteUser = async (userId, next) => {
+  try {
+    await UserColl.deleteOne({ _id: ObjectId(userId) });
+    next({ status: 200, message: 'User deleted successfully..!' });
+  } catch (err) {
+    console.log(err);
     next({ status: 500, message: err });
   }
 }
@@ -106,4 +147,18 @@ async function deleteClientUser(id, next) {
   } catch (err) {
     return next({ status: 500, message: "Something went wrong" });
   }
+}
+
+async function populateName (userData) {
+  let state = userData.state ? await StateColl.findOne({_id: userData.state}) : {name: ''};
+  const dist = userData.district ? await DistColl.findOne({_id: userData.district}) : {name: ''};
+  const mand = userData.mandal ? await MandalColl.findOne({_id: userData.mandal}) : {name: ''};
+  const consti = userData.contestingConstituency ? await ConstColl.findOne({_id: userData.contestingConstituency}) :{name: ''};
+  userData.state = state.name;
+  userData.district = dist.name;
+  userData.mandal = mand.name;
+  userData.contestingConstituency = consti.name;
+  // console.log(userData);
+  return userData;
+
 }

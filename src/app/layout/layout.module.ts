@@ -9,12 +9,14 @@ import { UsersComponent } from './components/users/users.component';
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import { ngfModule } from "angular-file";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserProfileComponent
   ],
   exports: [],
   imports: [

@@ -27,10 +27,21 @@ router.route('/getUser/:userId').get(function (req, res) {
   });
 });
 
+router.route('/viewUserDetails/:userId').get(function (req, res) {
+  UserController.viewUserDetails(req.params.userId, result => {
+    res.status(result.status).json(result);
+  });
+});
+
 // Update User by ID
 router.route('/updateUser/:userId').put(function (req, res) {
-  console.log(req.user._id, "===>");
   UserController.updateUser(req.params.userId, req.body, req.user._id, result => {
+    res.status(result.status).json(result);
+  });
+});
+
+router.route('/deleteUser/:userId').delete(function (req, res) {
+  UserController.deleteUser(req.params.userId, result => {
     res.status(result.status).json(result);
   });
 });

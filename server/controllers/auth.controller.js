@@ -5,7 +5,8 @@ module.exports = {
   generateToken,
 };
 
-function generateToken(user) {
-  const payload = JSON.stringify(user);
-  return jwt.sign(payload, config.jwtSecret);
+function generateToken(payload) {
+  return jwt.sign(payload, "mysecret", {
+    "expiresIn": 900
+  });
 }

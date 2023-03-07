@@ -9,7 +9,6 @@ const ConstituenciesColl = require("../models/constituencies.model");
 exports.getAllStates = async (next) => {
     try {
         const states = await StatesColl.find({});
-        console.log(states);
         if (states) {
             next({status: 200, states, message: 'Successfully fetched states data..!'});
         } else {
@@ -18,6 +17,34 @@ exports.getAllStates = async (next) => {
     } catch (e) {
         console.log(e);
         next({status: 500, data: e, message: 'Error in loading States data..!'})
+    }
+}
+
+exports.getAllDistricts = async (next) => {
+    try {
+        const districts = await DistrictsColl.find({});
+        if (districts) {
+            next({status: 200, districts, message: 'Successfully fetched Districts data..!'});
+        } else {
+            next({status: 400, data: [], message: 'no data found..!'});
+        }
+    } catch (e) {
+        console.log(e);
+        next({status: 500, data: e, message: 'Error in loading Districts data..!'})
+    }
+}
+
+exports.getAllMandals = async (next) => {
+    try {
+        const mandals = await MandalsColl.find({});
+        if (mandals) {
+            next({status: 200, mandals, message: 'Successfully fetched Mandals data..!'});
+        } else {
+            next({status: 400, data: [], message: 'no data found..!'});
+        }
+    } catch (e) {
+        console.log(e);
+        next({status: 500, data: e, message: 'Error in loading Mandals data..!'})
     }
 }
 

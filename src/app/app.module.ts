@@ -20,6 +20,7 @@ import {SpinnerInterceptor} from "@app/interceptors/spinner.interceptor";
 import { ngfModule } from "angular-file";
 import { HomeComponent } from './home/home.component';
 import { NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
+import {CatchErrorInterceptor} from "@app/interceptors/http-error.interceptor";
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     SpinnerService,
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CatchErrorInterceptor, multi: true },
     DatePipe
   ],
   bootstrap: [AppComponent],

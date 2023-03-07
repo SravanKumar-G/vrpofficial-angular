@@ -42,7 +42,7 @@ const UserSchema = new mongoose.Schema({
         employmentType: String,
         dependents: Number,
         interestInPolitics: String,
-        isContestInElections: String,
+        isContestInElection: String,
         positionToContest: Array,
         contestingConstituency: String,
         typeOfContribution: Array,
