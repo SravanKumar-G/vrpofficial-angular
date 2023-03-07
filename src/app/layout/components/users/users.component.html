@@ -21,7 +21,7 @@
                 <div class="tile-body">
                     <div class="row  mt-3 mb-3">
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" placeholder="search by mobile number"
+                            <input type="text" class="form-control" placeholder="Search by mobile number"
                                    [(ngModel)]="query.phoneNumber"
                                    [ngModelOptions]="{standalone: true}" />
                         </div>
@@ -92,7 +92,7 @@
                                             class="btn btn-sm btn-primary ml-1" title="Delete User">
                                         <i aria-hidden="true" class="fa fa-trash fa-1x"></i>
                                     </button>
-                                    <button (click)="resetPass(user._id)"
+                                    <button (click)="resetPass(user)"
                                             class="btn btn-sm btn-danger ml-1" title="reset password">
                                         <i aria-hidden="true" class="fa fa-key"></i>
                                     </button>
@@ -297,93 +297,73 @@
         </button>
     </div>
 </ng-template>
+
+<!--password change modal-->
 <ng-template #resetPasswordModal let-c="close" let-d="dismiss">
+    <form (ngSubmit)="resetPassword()" [formGroup]="resetPassForm" autocomplete="off">
     <div class="modal-header">
-        <h6 class="modal-title form-head-line-style" style="text-transform: capitalize;">
+        <h6 class="modal-title form-head-line-style">
             <i aria-hidden="true" class="fa fa-key fa-1x"></i>
-            Change Password
-            <b><u>({{userName}})</u></b>
+            You are updating PASSWORD for <b><u>({{userName}})</u></b>
         </h6>
     </div>
     <!--    <modal-content>-->
     <div class="modal-body">
-        <form (ngSubmit)="submitChangePassword(changePasswordForm.invalid)" [formGroup]="changePasswordForm">
-            <div class="tile">
-                <div class="tile-body fields-up text-left">
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <label class="control-label">PASSWORD <b class="mandatory-field">*</b></label>
-                            <div [ngClass]="{ 'has-error' : changePasswordForm.controls['password'].invalid &&
-                                         !changePasswordForm.controls['password'].pristine && changePasswordForm.controls['password'].dirty, 'has-success' : changePasswordForm.controls['password'].valid && !changePasswordForm.controls['password'].pristine}"
-                                 class="has-feedback">
-                                <div class="input-group mb-3">
-                                    <input (ngModelChange)="confirmPasswordC(changePassword.password,changePassword.confirmPassword)"
-                                           [(ngModel)]="changePassword.password"
-                                           [minLength]="6"
-                                           autocomplete="off"
-                                           class="form-control form-control-bottom"
-                                           formControlName="password"
-                                           id="password"
-                                           name="password"
-                                           placeholder="Enter New Password" required
-                                           type="{{showAndHideText}}">
-                                    <span (click)="showAndHidePassword(!isTrue, 'Password')" class="input-group-text"
-                                          id="basic-addon1">
-                                        <i *ngIf="isTrue" class="fa fa-eye"></i>
-                                        <i *ngIf="!isTrue" class="fa fa-eye-slash"></i>
-                                    </span>
-                                </div>
-                                <span *ngIf="changePasswordForm.controls['password'].invalid && changePasswordForm.controls['password'].dirty"
-                                      class="help-block">
-                                Please Enter at least 6 characters</span>
-                            </div>
-                        </div>
+            <div class="col-12">
+            <div class="form-group col-xs-12">
+                <div class="label-text form-check-label">Password: <span class="mandatory-field">*</span></div>
+                <div class="input-group">
+                <input [ngClass]="{'is-invalid': submitted && r.password.errors}" autofocus
+                       class="form-control"
+                       formControlName="password" id="password" name="password"
+                       placeholder="enter password" required
+                       type="{{showPassword ? 'text' : 'password'}}">
+                    <div (click)="togglePasswordVisibility(!showPassword)" class="input-group-append pointer-event"
+                         style="cursor: pointer;">
+                                    <span class="input-group-text"
+                                          title="{{showPassword ? 'Hide': 'Show'}}">
+                                        <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i></span>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <label class="control-label" for="ConfirmPassword">CONFIRM PASSWORD <b
-                                    class="mandatory-field">*</b></label>
-                            <div [ngClass]="{ 'has-error' : changePasswordForm.controls['confirmPassword'].invalid &&
-                                         !changePasswordForm.controls['confirmPassword'].pristine && changePasswordForm.controls['confirmPassword'].dirty, 'has-success' : changePasswordForm.controls['confirmPassword'].valid && !changePasswordForm.controls['confirmPassword'].pristine}"
-                                 class="has-feedback">
-                                <div class="input-group mb-3">
-                                    <input (ngModelChange)="confirmPasswordC(changePassword.password,changePassword.confirmPassword)"
-                                           [(ngModel)]="changePassword.confirmPassword"
-                                           [minLength]="6"
-                                           autocomplete="off"
-                                           class="form-control form-control-bottom"
-                                           formControlName="confirmPassword"
-                                           id="confirmPassword"
-                                           name="confirmPassword"
-                                           placeholder="Confirm New Password" required
-                                           type="{{ConfirmPasswordShowAndHideText}}">
-                                    <span (click)="showAndHidePassword(!isTrueConfirm, 'Confirm')"
-                                          class="input-group-text"
-                                          id="basic-addon2">
-                                        <i *ngIf="isTrueConfirm" class="fa fa-eye"></i>
-                                        <i *ngIf="!isTrueConfirm" class="fa fa-eye-slash"></i>
-                                    </span>
-                                </div>
-                                <span *ngIf="passwordValid" class="help-block">Passwords do not match</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span style="color: #dc3545">{{changePasswordError}}</span>
-                        </div>
-                    </div>
+            </div>
+                <div *ngIf="(r.password.invalid && (r.password.touched || r.password.dirty)) || submitted"
+                     class="mt-1">
+                    <span *ngIf="r.password.errors?.required" class="text-danger">Password is required</span>
+                    <span *ngIf="r.password.errors?.minlength" class="text-danger">Password should be 6 or more</span>
                 </div>
             </div>
-        </form>
+            <div class="form-group col-xs-12">
+                <div class="label-text form-check-label">Confirm Password: <span class="mandatory-field">*</span></div>
+                <div class="input-group">
+                <input [ngClass]="{'is-invalid': submitted && r.confirmPassword.errors}" autofocus
+                       class="form-control"
+                       formControlName="confirmPassword" id="confirmPassword" name="confirmPassword"
+                       placeholder="enter password" required
+                       type="{{showConfirmPassword ? 'text' : 'password'}}">
+                <div (click)="toggleConfirmPasswordVisibility(!showConfirmPassword)"
+                     class="input-group-append pointer-event" style="cursor: pointer;">
+                                    <span class="input-group-text"
+                                          title="{{showConfirmPassword ? 'Hide': 'Show'}}">
+                                        <i [ngClass]="showConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i></span>
+                </div>
+            </div>
+                <div *ngIf="(r.confirmPassword.invalid && (r.confirmPassword.touched || r.confirmPassword.dirty)) || submitted"
+                     class="mt-1">
+                    <span *ngIf="r.confirmPassword.errors?.required" class="text-danger">Confirm Password is required</span>
+                    <span *ngIf="r.confirmPassword.errors?.minlength"
+                          class="text-danger">Password should be minimum 6 characters</span>
+                    <span *ngIf="r.confirmPassword.errors?.confirmPasswordValidator"
+                          class="text-danger">Password and Confirm Password should be matched</span>
+                </div>
+            </div>
+            </div>
     </div>
     <div class="modal-footer">
         <button (click)="closeModal()" class="btn btn-secondary btn-sm btn-all-shadow waves-effect waves-light"
                 type="button">Close
         </button>
-        <button (click)="submitChangePassword(!changePasswordForm.invalid)"
-                class="btn btn-danger btn-sm btn-all-shadow waves-effect waves-light"
+        <button class="btn btn-danger btn-sm btn-all-shadow waves-effect waves-light"
                 type="submit">Submit
         </button>
     </div>
+    </form>
 </ng-template>

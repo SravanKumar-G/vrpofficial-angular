@@ -18,6 +18,8 @@ export class SignupComponent implements OnInit {
   public districts: Array <any> = [];
   public mandals: Array <any> = [];
   public constituencies: Array <any> = [];
+  showPassword: any = false;
+  showConfirmPassword: any = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -176,5 +178,13 @@ export class SignupComponent implements OnInit {
   getManContByDistId(event: any) {
     const distId = event.target.value;
     this.getMandals(distId);
+  }
+
+  togglePasswordVisibility(showOrHide: any) {
+    this.showPassword = showOrHide;
+  }
+
+  toggleConfirmPasswordVisibility(showOrHide: any) {
+    this.showConfirmPassword = showOrHide;
   }
 }

@@ -19,7 +19,7 @@ export class ApiUrlsService {
   getUserDetails = '/api/v1/user/viewUserDetails/';
   updateById ='/api/v1/user/updateUser/';
   deleteUser ='/api/v1/user/deleteUser/';
-  updatePassword ='/api/v1/user/updatePassword';
+  updatePassword ='/api/v1/user/updatePassword/';
   getAllStates ='/api/v1/noauth/getStates';
   getAllDistricts ='/api/v1/noauth/getAllDistricts';
   getAllMandals ='/api/v1/noauth/getAllMandals';

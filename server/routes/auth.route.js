@@ -1,11 +1,9 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const passport = require('passport');
-const userCtrl = require('../controllers/user.controller');
 const authCtrl = require('../controllers/auth.controller');
 const UserColl = require('../models/user.model');
 const bcrypt = require("bcrypt");
-const UserController = require("../controllers/user.controller");
 
 const router = express.Router();
 module.exports = router;
