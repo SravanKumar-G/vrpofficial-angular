@@ -117,14 +117,13 @@ exports.deleteUser = async (userId, next) => {
   }
 }
 
-async function updatePassword(id, password, next) {
-  let newPassword = password;
+exports.updatePassword = async (userId, password, next) => {
   const salt = await bcrypt.genSalt(10);
-  newPassword = await bcrypt.hash(newPassword, salt);
+  const hashedPassword = await bcrypt.hash(password, salt);
   try {
     UserColl.findOneAndUpdate(
-      { _id: ObjectId(id) },
-      { $set: { password: newPassword } },
+      { _id: ObjectId(userId) },
+      { $set: { password: hashedPassword } },
       { new: true },
       async (err, user) => {
         if (err) throw err;

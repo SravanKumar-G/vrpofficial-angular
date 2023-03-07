@@ -2,20 +2,25 @@
     <h3 class="text-uppercase">Become a Member</h3>
     <h5 style="color: cornflowerblue;">VR Party is India’s fastest growing political party. Join as a member today and
         help shape the future course of politics in India.</h5>
-  <p>
-    As per the Constitution of VR Party, any citizen of India of the age of 18 years or above who subscribes to the objectives of the Party shall be eligible to become a member of the Party, provided that he or she:
-  </p>
-  <ul class="m-0 p-0" >
-    <li>Is not a member of any other political Party registered with the Election Commission of India;</li>
-    <li>Is not a member of any organization whose views, policies or actions are in conflict with the objectives of the Party; and/or</li>
-    <li>Has not been convicted of any offence involving moral turpitude</li>
-  </ul>
-    <div class="mt-5 pt-5 signup-cont" style="box-shadow: -1px 2px 15px 1px #ccccdc; border-radius: 10px;">
+    <p>
+        As per the Constitution of VR Party, any citizen of India of the age of 18 years or above who subscribes to the
+        objectives of the Party shall be eligible to become a member of the Party, provided that he or she:
+    </p>
+    <ul class="m-0 p-0">
+        <li>Is not a member of any other political Party registered with the Election Commission of India;</li>
+        <li>Is not a member of any organization whose views, policies or actions are in conflict with the objectives of
+            the Party; and/or
+        </li>
+        <li>Has not been convicted of any offence involving moral turpitude</li>
+    </ul>
+    <div class="mt-5 signup-cont" style="box-shadow: -1px 2px 15px 1px #ccccdc; border-radius: 10px;">
         <div class="card mx-auto border-0 col-sm-10 col-xs-12">
             <div class="card-header border-bottom-0 bg-transparent">
                 <ul class="nav nav-tabs justify-content-center pt-4" id="pills-tab" role="tablist">
                     <li class="nav-item">
-                        <a aria-controls="pills-login" aria-selected="true" class="nav-link active text-primary"
+                        <a aria-controls="pills-login" aria-selected="true"
+                           [ngClass]=""
+                           class="nav-link active text-primary"
                            data-toggle="pill"
                            href="#pills-login"
                            id="pills-login-tab"
@@ -38,7 +43,8 @@
                          role="tabpanel">
                         <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
                             <div class="form-group">
-                                <div class="label-text form-check-label">Mobile Number<span class="mandatory-field">*</span></div>
+                                <div class="label-text form-check-label">Mobile Number<span
+                                        class="mandatory-field">*</span></div>
                                 <input [ngClass]="{'is-invalid': submitted && f.phoneNumber.errors}" autofocus
                                        class="form-control" formControlName="phoneNumber" maxlength="10" minlength="10"
                                        name="phoneNumber"
@@ -55,18 +61,26 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="label-text form-check-label">Password<span class="mandatory-field">*</span></div>
-                                <input [ngClass]="{'is-invalid': submitted && f.password.errors}"
-                                       class="form-control" formControlName="password" id="password" name="password"
-                                       placeholder="Password"
-                                       required
-                                       type="password">
+                                <div class="label-text form-check-label">Password<span class="mandatory-field">*</span>
+                                </div>
+                                <div class="input-group">
+                                    <input [ngClass]="{'is-invalid': submitted && f.password.errors}"
+                                           class="form-control" formControlName="password" id="password" name="password"
+                                           placeholder="Password"
+                                           required
+                                           type="{{showPassword ? 'text' : 'password'}}">
+                                    <div (click)="togglePasswordVisibility(!showPassword)" class="input-group-append pointer-event"
+                                         style="cursor: pointer;">
+                                    <span class="input-group-text"
+                                          title="{{showPassword ? 'Hide Password': 'Show Password'}}">
+                                        <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i></span>
+                                    </div>
+                                </div>
                                 <div *ngIf="f.password.invalid && (f.password.touched || f.password.dirty) || submitted">
                                     <small *ngIf="f.password.errors?.required" class="text-danger">Password
                                         Required</small>
                                     <small *ngIf="f.password.errors?.minlength" class="text-danger">Password should be
-                                        minimum 6
-                                        characters</small>
+                                        minimum 6 characters</small>
                                 </div>
                             </div>
 

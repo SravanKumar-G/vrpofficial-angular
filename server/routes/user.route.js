@@ -45,3 +45,10 @@ router.route('/deleteUser/:userId').delete(function (req, res) {
     res.status(result.status).json(result);
   });
 });
+
+router.route('/updatePassword/:userId').post(function (req, res) {
+  console.log(req.params.userId, req.body);
+  UserController.updatePassword(req.params.userId, req.body.password, result => {
+    res.status(result.status).json(result);
+  });
+});

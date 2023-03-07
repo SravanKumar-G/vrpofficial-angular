@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
   returnUrl: any= String;
   error = '';
   public showAndHideText = 'password';
+  showPassword: any = false;
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -62,7 +63,7 @@ export class HomeComponent implements OnInit {
       this.router.navigate([this.returnUrl]);
       Swal.fire('Success', 'Login in successfully..!', 'success');
     }, (error: any) => {
-      this.error = error.error.message;
+      this.error = error.message;
       this.loading = false;
     });
   }
@@ -75,4 +76,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  togglePasswordVisibility(showOrHide: any) {
+    this.showPassword = showOrHide;
+  }
 }

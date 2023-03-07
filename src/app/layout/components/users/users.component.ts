@@ -3,8 +3,9 @@ import {ApiServiceService} from "@app/services/api-service.service";
 import {ApiUrlsService} from "@app/services/api-urls.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {ConfirmPasswordValidator} from "@app/services/ConfirmPassword.validator";
 
 @Component({
     selector: 'app-users',
@@ -40,13 +41,19 @@ export class UsersComponent implements OnInit {
     public passwordValid: boolean;
     // @ts-ignore
     public changePasswordForm: FormGroup;
-    // @ts-ignore
-    // @ts-ignore
-    public passwordConfirmValid: boolean;
     public showAndHideText = 'password';
     public ConfirmPasswordShowAndHideText = 'password';
     isTrue: boolean = false;
     isTrueConfirm: boolean = false;
+
+    get r() {
+        return this.resetPassForm.controls;
+    }
+
+    resetPassForm: any = FormGroup;
+    public submitted = false;
+    showPassword: any = false;
+    showConfirmPassword: any = false;
 
 
     constructor(public apiService: ApiServiceService,
@@ -61,6 +68,12 @@ export class UsersComponent implements OnInit {
         this.getAllStates();
         this.getAllDistricts('');
         this.getAllMandals('');
+        this.resetPassForm = this.formBuilder.group({
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+        },{
+            validator: ConfirmPasswordValidator("password", "confirmPassword")
+        })
     }
 
     getAllStates() {
@@ -217,8 +230,9 @@ export class UsersComponent implements OnInit {
         }
     }
 
-    resetPass(_id: any) {
-        this.userId = _id;
+    resetPass(userInfo: any) {
+        this.userName = userInfo.firstName + ' ' + userInfo.lastName;
+        this.userId = userInfo._id;
         this.ngModalService.open(this.resetPasswordModal, {backdrop: 'static', keyboard: false,})
     }
 
@@ -270,5 +284,29 @@ export class UsersComponent implements OnInit {
             district: '',
             mandal: ''
         }
+    }
+
+    resetPassword() {
+        this.submitted = true;
+        // stop here if form is invalid
+        if (this.resetPassForm.invalid) {
+            return;
+        }
+        this.apiService.getAll(this.apiUrls.updatePassword + this.userId,
+            {password: this.r.password.value})
+            .subscribe((res: any) => {
+            if (res) {
+                this.close();
+                Swal.fire('Success', 'Password Updated successfully..!', 'success')
+            }
+        })
+    }
+
+    togglePasswordVisibility(showOrHide: any) {
+        this.showPassword = showOrHide;
+    }
+
+    toggleConfirmPasswordVisibility(showOrHide: any) {
+        this.showConfirmPassword = showOrHide;
     }
 }
