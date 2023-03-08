@@ -20,6 +20,28 @@ export class SignupComponent implements OnInit {
   public constituencies: Array <any> = [];
   showPassword: any = false;
   showConfirmPassword: any = false;
+  positionArray: any = [
+    {key: 'MP', value: 'MP'},
+    {key: 'MLA', value: 'MLA'},
+    {key: 'MLC', value: 'MLC'},
+    {key: 'CORPORATOR', value: 'CORPORATOR'},
+    {key: 'COUNCELLOR', value: 'COUNCELLOR'},
+    {key: 'SARPANCH', value: 'SARPANCH'},
+    {key: 'OTHERS', value: 'OTHERS'},
+  ];
+  contributeArray: any = [
+    {key: 'Work in your community', value: '1'},
+    {key: 'Become a digital activist', value: '2'},
+    {key: 'Join calling campaigns', value: '3'},
+    {key: 'Attend party events', value: '4'},
+    {key: 'IT support (coding)', value: '5'},
+    {key: 'web design etc.', value: '6'},
+    {key: 'Become a photo/video volunteer', value: '7'},
+    {key: 'Provide housing to volunteers', value: '8'},
+    {key: 'Content writing (mention preferred language below)', value: '8'},
+    {key: 'Policy/Research support', value: '9'},
+    {key: 'Others', value: '10'},
+  ]
 
   constructor(
     private formBuilder: FormBuilder,
