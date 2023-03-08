@@ -419,16 +419,30 @@
             <div class="form-group col-sm-6 col-xs-12">
                 <div class="label-text form-check-label">If yes how would you like to contest in election ?: <span
                         class="mandatory-field">*</span></div>
-                <select class="form-control" formControlName="positionToContest" multiple>
-                    <option selected value="">--Select Positions--</option>
-                    <option value="MP">MP</option>
-                    <option value="MLA">MLA</option>
-                    <option value="MLC">MLC</option>
-                    <option value="CORPORATOR">CORPORATOR</option>
-                    <option value="COUNCELLOR">COUNCELLOR</option>
-                    <option value="SARPANCH">SARPANCH</option>
-                    <option value="OTHERS">OTHERS</option>
-                </select>
+                <ng-select
+                        class="ng-select-form-control-sm"
+                        [items]="positionArray"
+                        [multiple]="true"
+                        bindLabel="key"
+                        [closeOnSelect]="false"
+                        bindValue="value"
+                        placeholder="Select Options"
+                        formControlName="positionToContest"
+                >
+                    <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                        <div class="ng-value" *ngFor="let item of items | slice:0:1" [hidden]="items.length > 1">
+                            <span class="ng-value-label">{{item.key}}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        </div>
+                        <div class="ng-value" *ngIf="items.length > 1">
+                            <span class="ng-value-label">{{items.length}} Options Selected...</span>
+                        </div>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <input id="item-{{index}}-roles" type="checkbox" [ngModel]="item$.selected" [ngModelOptions]="{standalone: true}"/>
+                        {{item.key}}
+                    </ng-template>
+                    </ng-select>
                 <div *ngIf="(r.positionToContest.invalid && (r.positionToContest.touched || r.positionToContest.dirty)) || submitted"
                      class="mt-1">
                     <span *ngIf="r.positionToContest.errors?.required" class="text-danger">Field is required</span>
@@ -450,20 +464,30 @@
             </div>
             <div class="form-group col-sm-12 col-xs-12">
                 <div class="label-text form-check-label">How would you like to contribute?</div>
-                <select class="form-control" formControlName="typeOfContribution" multiple>
-                    <option selected value="">--Select Positions--</option>
-                    <option value="1">Work in your community/mohalla</option>
-                    <option value="2">Become a digital activist</option>
-                    <option value="3">Join calling campaigns</option>
-                    <option value="4">Attend party events</option>
-                    <option value="5">IT support (coding)</option>
-                    <option value="6">web design etc.</option>
-                    <option value="7">Become a photo/video volunteer</option>
-                    <option value="8">Provide housing to volunteers</option>
-                    <option value="9">Content writing (mention preferred language below)</option>
-                    <option value="10">Policy/Research support</option>
-                    <option value="11">Others</option>
-                </select>
+                <ng-select
+                        class="ng-select-form-control-sm"
+                        [items]="contributeArray"
+                        [multiple]="true"
+                        bindLabel="key"
+                        [closeOnSelect]="false"
+                        bindValue="value"
+                        placeholder="Select Options"
+                        formControlName="typeOfContribution"
+                >
+                    <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                        <div class="ng-value" *ngFor="let item of items | slice:0:1" [hidden]="items.length > 1">
+                            <span class="ng-value-label">{{item.key}}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        </div>
+                        <div class="ng-value" *ngIf="items.length > 1">
+                            <span class="ng-value-label">{{items.length}} Options Selected...</span>
+                        </div>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <input id="item-{{index}}-roles" type="checkbox" [ngModel]="item$.selected" [ngModelOptions]="{standalone: true}"/>
+                        {{item.key}}
+                    </ng-template>
+                </ng-select>
             </div>
             <div class="form-group col-sm-12 col-xs-12">
                 <div class="label-text form-check-label">Would you like to tell us more about yourself ?</div>
