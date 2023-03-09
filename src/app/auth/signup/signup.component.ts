@@ -38,9 +38,9 @@ export class SignupComponent implements OnInit {
     {key: 'web design etc.', value: '6'},
     {key: 'Become a photo/video volunteer', value: '7'},
     {key: 'Provide housing to volunteers', value: '8'},
-    {key: 'Content writing (mention preferred language below)', value: '8'},
-    {key: 'Policy/Research support', value: '9'},
-    {key: 'Others', value: '10'},
+    {key: 'Content writing (mention preferred language below)', value: '9'},
+    {key: 'Policy/Research support', value: '10'},
+    {key: 'Others', value: '11'},
   ]
 
   constructor(
