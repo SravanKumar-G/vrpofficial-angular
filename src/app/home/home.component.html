@@ -17,34 +17,52 @@
 <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-        <h1 class="logo"><a href="index.html">BizLand<span>.</span></a></h1>
+<!--        <h1 class="logo"><a href="index.html">BizLand<span>.</span></a></h1>-->
+        <span><img src="../../assets/Images/vrplogo.jpg"/></span>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
 
         <nav id="navbar" class="navbar">
             <ul>
                 <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#about">About</a></li>
-                <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-                <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="#">Drop Down 1</a></li>
-                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">Deep Drop Down 1</a></li>
-                                <li><a href="#">Deep Drop Down 2</a></li>
-                                <li><a href="#">Deep Drop Down 3</a></li>
-                                <li><a href="#">Deep Drop Down 4</a></li>
-                                <li><a href="#">Deep Drop Down 5</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Drop Down 2</a></li>
-                        <li><a href="#">Drop Down 3</a></li>
-                        <li><a href="#">Drop Down 4</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#">Election Symbol</a></li>
+                        <li><a href="#">Leadership</a></li>
+                        <li><a href="#">State Secretary</a></li>
+                        <li><a href="#">Why We Are Different</a></li>
                     </ul>
                 </li>
+                <li><a class="nav-link scrollto" href="#services">Services</a></li>
+                <li><a class="nav-link scrollto " href="#portfolio">Gallery</a></li>
+                <li class="dropdown"><a href="#"><span>Media</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Press Realese</a></li>
+                        <li><a href="#">Videos</a></li>
+                        <li><a href="#">Offical Spokepersopn</a></li>
+                        <li><a href="#">Gallery</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#"><span>Elections</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+<!--                        <li><a href="#">Drop Down 1</a></li>-->
+<!--                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>-->
+<!--                            <ul>-->
+<!--                                <li><a href="#">Deep Drop Down 1</a></li>-->
+<!--                                <li><a href="#">Deep Drop Down 2</a></li>-->
+<!--                                <li><a href="#">Deep Drop Down 3</a></li>-->
+<!--                                <li><a href="#">Deep Drop Down 4</a></li>-->
+<!--                                <li><a href="#">Deep Drop Down 5</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+                        <li><a href="#">Manifest</a></li>
+                        <li><a href="#">Khammam  Elections</a></li>
+<!--                        <li><a href="#">Drop Down 4</a></li>-->
+                    </ul>
+                </li>
+                <li><a class="nav-link scrollto" href="#Registration" (click)="signupHideShowFun()">Registration</a></li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -53,133 +71,464 @@
     </div>
 </header>
 
+    <!-- End Header -->
+
     <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center">
-        <div class="container" data-aos="zoom-out" data-aos-delay="100">
+    <section id="hero" class="d-flex align-items-center" *ngIf="!signupHideShow">
+        <div class="container" data-aos="zoom-out" data-aos-delay="100" >
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="..." alt="First slide">
+                        <img class="d-block w-100" src="../../assets/Images/cover%20page%20qr.jpg" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="..." alt="Second slide">
+                        <img class="d-block w-100" src="../../assets/Images/web%20front%20page%20copy.jpg" alt="Second slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="..." alt="Third slide">
+                        <img class="d-block w-100" src="../../assets/Images/FB_IMG_1605970165640.jpg" alt="Third slide">
                     </div>
                 </div>
             </div>
         </div>
-    </section><!-- End Hero -->
-</div>
-<!-- End Header -->
+    </section>
+    <!-- End Hero -->
 
+    <main id="main"  *ngIf="!signupHideShow">
 
-<div class="container mt-5">
-    <h3 class="text-uppercase">Become a Member</h3>
-    <h5 style="color: cornflowerblue;">VR Party is India’s fastest growing political party. Join as a member today and
-        help shape the future course of politics in India.</h5>
-    <p>
-        As per the Constitution of VR Party, any citizen of India of the age of 18 years or above who subscribes to the
-        objectives of the Party shall be eligible to become a member of the Party, provided that he or she:
-    </p>
-    <ul class="m-0 p-0">
-        <li>Is not a member of any other political Party registered with the Election Commission of India;</li>
-        <li>Is not a member of any organization whose views, policies or actions are in conflict with the objectives of
-            the Party; and/or
-        </li>
-        <li>Has not been convicted of any offence involving moral turpitude</li>
-    </ul>
-    <div class="mt-5 signup-cont" style="box-shadow: -1px 2px 15px 1px #ccccdc; border-radius: 10px;">
-        <div class="card mx-auto border-0 col-sm-10 col-xs-12">
-            <div class="card-header border-bottom-0 bg-transparent">
-                <ul class="nav nav-tabs justify-content-center pt-4" id="pills-tab" role="tablist">
-                    <li class="nav-item">
-                        <a aria-controls="pills-login" aria-selected="true"
-                           [ngClass]=""
-                           class="nav-link active text-primary"
-                           data-toggle="pill"
-                           href="#pills-login"
-                           id="pills-login-tab"
-                           role="tab">Login</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a aria-controls="pills-register" aria-selected="false" class="nav-link text-primary"
-                           data-toggle="pill"
-                           href="#pills-register"
-                           id="pills-register-tab"
-                           role="tab">Register</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card-body pb-4">
-                <div class="tab-content" id="pills-tabContent">
-                    <div aria-labelledby="pills-login-tab" class="tab-pane fade show active" id="pills-login"
-                         role="tabpanel">
-                        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-                            <div class="form-group">
-                                <div class="label-text form-check-label">Mobile Number<span
-                                        class="mandatory-field">*</span></div>
-                                <input [ngClass]="{'is-invalid': submitted && f.phoneNumber.errors}" autofocus
-                                       class="form-control" formControlName="phoneNumber" maxlength="10" minlength="10"
-                                       name="phoneNumber"
-                                       placeholder="Mobile Number"
-                                       required
-                                       type="text">
-
-                                <div *ngIf="(f.phoneNumber.invalid && (f.phoneNumber.touched || f.phoneNumber.dirty)) || submitted"
-                                     class="mt-1">
-                                    <span *ngIf="f.phoneNumber.errors?.required" class="text-danger">Mobile Number is required</span>
-                                    <span *ngIf="f.phoneNumber.errors?.pattern || f.phoneNumber.errors?.minlength"
-                                          class="text-danger">Mobile Number must be a 10 digit valid Number</span>
-                                </div>
+        <!-- ======= Featured Services Section ======= -->
+        <section id="featured-services" class="featured-services">
+            <div class="container" data-aos="fade-up">
+                <div class="row justify-content-around">
+                    <div class="section-title">
+                        <h2>LATEST NEWS</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" >
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon">
+                                <img src="../../assets/Images/group1.webp" style="object-fit: cover" width="280px" height="270px">
                             </div>
+                            <p class="description">12 March 2023</p>
+                            <h4 class="title"><a href="">VRP SAINYAM</a></h4>
+                            <span class="description"><a href="">Continue Reading</a></span>
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <div class="label-text form-check-label">Password<span class="mandatory-field">*</span>
-                                </div>
-                                <div class="input-group">
-                                    <input [ngClass]="{'is-invalid': submitted && f.password.errors}"
-                                           class="form-control" formControlName="password" id="password" name="password"
-                                           placeholder="Password"
+                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon">
+                                <img src="../../assets/Images/group2.webp" style="object-fit: cover" width="280px" height="270px">
+                            </div>
+                            <p class="description">12 March 2023</p>
+                            <h4 class="title"><a href="">VRP SAINYAM</a></h4>
+                            <span class="description"><a href="">Continue Reading</a></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon">
+                                <img src="../../assets/Images/FB_IMG_1612290104748.jpg" style="object-fit: cover" width="280px" height="270px">
+                            </div>
+                            <p class="description">12 March 2023</p>
+                            <h4 class="title"><a href="">VRP SAINYAM</a></h4>
+                            <span class="description"><a href="">Continue Reading</a></span>
+                        </div>
+                    </div>
+
+<!--                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">-->
+<!--                        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">-->
+<!--                            <div class="icon"><i class="bx bx-file"></i></div>-->
+<!--                            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>-->
+<!--                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">-->
+<!--                        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">-->
+<!--                            <div class="icon"><i class="bx bx-tachometer"></i></div>-->
+<!--                            <h4 class="title"><a href="">Magni Dolores</a></h4>-->
+<!--                            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">-->
+<!--                        <div class="icon-box" data-aos="fade-up" data-aos-delay="400">-->
+<!--                            <div class="icon"><i class="bx bx-world"></i></div>-->
+<!--                            <h4 class="title"><a href="">Nemo Enim</a></h4>-->
+<!--                            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Featured Services Section -->
+
+
+        <!--        Videos Section Start-->
+
+        <section id="featured-services" class="featured-services">
+            <div class="container" data-aos="fade-up">
+                <div class="row justify-content-around">
+                    <div class="section-title">
+                        <h2>LATEST VIDEOS</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon">
+                                <img src="../../assets/Images/hand.webp" style="object-fit: cover" width="480px" height="240px">
+                            </div>
+                            <p class="description">12 March 2023</p>
+                            <h4 class="title"><a href="">VRP SAINYAM</a></h4>
+                            <span class="description"><a href="">Lorem Ipsum</a></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon">
+                                <img src="../../assets/Images/party.webp" style="width: 100%">
+                            </div>
+                            <p class="description">12 March 2023</p>
+                            <h4 class="title"><a href="">VRP SAINYAM</a></h4>
+                            <span class="description"><a href="">Lorem Ipsum</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!--        Videos Section Ended-->
+
+
+        <!-- ======= About Section ======= -->
+        <section id="about" class="about section-bg">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>About</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
+<!--                        <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>-->
+                        <h3 class="fst-italic" style="font-size: 40px !important;">
+                            బరిసెలు వద్దు! బందూకులూ వద్దు!!
+                            ఓటు మన ఆయుధం! విజయమే మన గమ్యం!!
+                            బూర్జువా, భూస్వాముల పాలనకు పాతర వేద్దాం!
+                            అక్షరాలే..ఆయుధాలై..మాటలే.. తూటాలై..
+                            బిగించిన పిడికిలే..ఉద్యమ కెరటాలై..
+                            సాగుదాం..శ్రమ జీవుల సంక్షేమంకై..పోరాడుదాం..నిరుద్యోగుల ఉజ్వల భవితవ్యానికై..ఇదే మన నినాదం..విద్యార్థుల రాజకీయ పార్టీ నాదం..YS
+                        </h3>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+                        <img src="../../assets/Images/mem1.webp" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- End About Section -->
+
+
+        <!-- ======= Service Section ======= -->
+        <section id="services" class="services">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Services</h2>
+<!--                    <h3>Check our <span>Services</span></h3>-->
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="icon-box">
+                            <div class="icon">
+                                <img src="../../assets/Images/hand.webp" style="width: 100%">
+                            </div>
+                            <h4><a href="">SERVING THE COMMUNITY</a></h4>
+                            <p>Your candidate has been part of this community for many years, working tirelessly to make it a better place.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="icon-box">
+                            <div class="icon">
+                                <img src="../../assets/Images/hand2.webp" style="width: 100%">
+                            </div>
+                            <h4><a href="">UNITED BY A COMMON GOAL</a></h4>
+                            <p>Your candidate knows the value of being connected. That's why they're running for this position. Help them help you.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="icon-box">
+                            <div class="icon">
+                                <img src="../../assets/Images/vrp-hand-logo.webp" style="width: 100%">
+                            </div>
+                            <h4><a href="">GET INVOLVED</a></h4>
+                            <p>Your candidate can't win this race without your help. Flyering, word-of-mouth, and donating are all ways of helping us achieve our goals together.  </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Services Section -->
+
+
+        <!-- ======= Portfolio Section ======= -->
+        <section id="portfolio" class="portfolio">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Portfolio</h2>
+                </div>
+
+                <div class="row" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-lg-12 d-flex justify-content-center">
+                        <ul id="portfolio-flters">
+                            <li data-filter="*" class="filter-active">All</li>
+                            <li data-filter=".filter-app">App</li>
+                            <li data-filter=".filter-card">Card</li>
+                            <li data-filter=".filter-web">Web</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <img src="../../assets/Images/IMG_20210114_190207.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <a href="../../assets/Images/IMG_20210114_190207.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i>Zoom</a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                        <img src="../../assets/Images/FB_IMG_1612290508283.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <a href="../../assets/Images/FB_IMG_1612290508283.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i>Zoom</a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <img src="../../assets/Images/FB_IMG_1612290462692.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <a href="../../assets/Images/FB_IMG_1612290462692.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i>Zoom</a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                        <img src="../../assets/Images/Image_1622628344.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <a href="../../assets/Images/Image_1622628344.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i>Zoom</a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                        <img src="../../assets/Images/Capture%202021-02-26%2023.05.33.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <a href="../../assets/Images/Capture%202021-02-26%2023.05.33.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i>Zoom</a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <img src="../../assets/Images/FB_IMG_1612289779029.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <a href="../../assets/Images/FB_IMG_1612289779029.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i>Zoom</a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                        <img src="../../assets/Images/FB_IMG_1612289726986.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <a href="../../assets/Images/FB_IMG_1612289726986.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 1"><i class="bx bx-plus"></i>Zoom</a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                        <img src="../../assets/Images/FB_IMG_1612289588246.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <a href="../../assets/Images/FB_IMG_1612289588246.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i>Zoom</a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                        <img src="../../assets/Images/Capture%202023-02-26%2018.23.12.jpg" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <a href="../../assets/Images/Capture%202023-02-26%2018.23.12.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i>Zoom</a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Portfolio Section -->
+
+
+<!--         ======= Testimonials Section ======= -->
+        <section id="testimonials" class="testimonials">
+            <div class="container" data-aos="zoom-in" data-aos-delay="100">
+<!--                <img class="d-block w-100" src="../../assets/Images/FB_IMG_1612290104748.jpg" alt="First slide">-->
+<!--                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">-->
+<!--                    <div class="carousel-inner">-->
+<!--                        <div class="carousel-item active">-->
+<!--                            <img class="d-block w-100" src="../../assets/Images/FB_IMG_1612290104748.jpg" alt="First slide">-->
+<!--&lt;!&ndash;                            <div class="carousel-caption">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <h3>What we do</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                        <div class="carousel-item">-->
+<!--                            <img class="d-block w-100" src="..." alt="Second slide">-->
+<!--                        </div>-->
+<!--                        <div class="carousel-item">-->
+<!--                            <img class="d-block w-100" src="..." alt="Third slide">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <p id="timer" style="font-size: 40px;color: #1e1e1b;font-family: emoji;"></p>
+            </div>
+        </section>
+<!--         End Testimonials Section -->
+    </main>
+    <div class="container mt-5 mb-5" *ngIf="signupHideShow">
+        <h3 class="text-uppercase">Become a Member</h3>
+        <h5 style="color: cornflowerblue;">VR Party is India’s fastest growing political party. Join as a member today and
+            help shape the future course of politics in India.</h5>
+        <p>
+            As per the Constitution of VR Party, any citizen of India of the age of 18 years or above who subscribes to the
+            objectives of the Party shall be eligible to become a member of the Party, provided that he or she:
+        </p>
+        <ul class="m-0 p-0">
+            <li>Is not a member of any other political Party registered with the Election Commission of India;</li>
+            <li>Is not a member of any organization whose views, policies or actions are in conflict with the objectives of
+                the Party; and/or
+            </li>
+            <li>Has not been convicted of any offence involving moral turpitude</li>
+        </ul>
+        <div class="mt-5 signup-cont" style="box-shadow: -1px 2px 15px 1px #ccccdc; border-radius: 10px;">
+            <div class="card mx-auto border-0 col-sm-10 col-xs-12">
+                <div class="card-header border-bottom-0 bg-transparent">
+                    <ul class="nav nav-tabs justify-content-center pt-4" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a aria-controls="pills-login" aria-selected="true"
+                               [ngClass]=""
+                               class="nav-link active text-primary"
+                               data-toggle="pill"
+                               href="#pills-login"
+                               id="pills-login-tab"
+                               role="tab">Login</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a aria-controls="pills-register" aria-selected="false" class="nav-link text-primary"
+                               data-toggle="pill"
+                               href="#pills-register"
+                               id="pills-register-tab"
+                               role="tab">Register</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-body pb-4">
+                    <div class="tab-content" id="pills-tabContent">
+                        <div aria-labelledby="pills-login-tab" class="tab-pane fade show active" id="pills-login"
+                             role="tabpanel">
+                            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+                                <div class="form-group">
+                                    <div class="label-text form-check-label">Mobile Number<span
+                                            class="mandatory-field">*</span></div>
+                                    <input [ngClass]="{'is-invalid': submitted && f.phoneNumber.errors}" autofocus
+                                           class="form-control" formControlName="phoneNumber" maxlength="10" minlength="10"
+                                           name="phoneNumber"
+                                           placeholder="Mobile Number"
                                            required
-                                           type="{{showPassword ? 'text' : 'password'}}">
-                                    <div (click)="togglePasswordVisibility(!showPassword)" class="input-group-append pointer-event"
-                                         style="cursor: pointer;">
+                                           type="text">
+
+                                    <div *ngIf="(f.phoneNumber.invalid && (f.phoneNumber.touched || f.phoneNumber.dirty)) || submitted"
+                                         class="mt-1">
+                                        <span *ngIf="f.phoneNumber.errors?.required" class="text-danger">Mobile Number is required</span>
+                                        <span *ngIf="f.phoneNumber.errors?.pattern || f.phoneNumber.errors?.minlength"
+                                              class="text-danger">Mobile Number must be a 10 digit valid Number</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="label-text form-check-label">Password<span class="mandatory-field">*</span>
+                                    </div>
+                                    <div class="input-group">
+                                        <input [ngClass]="{'is-invalid': submitted && f.password.errors}"
+                                               class="form-control" formControlName="password" id="password" name="password"
+                                               placeholder="Password"
+                                               required
+                                               type="{{showPassword ? 'text' : 'password'}}">
+                                        <div (click)="togglePasswordVisibility(!showPassword)" class="input-group-append pointer-event"
+                                             style="cursor: pointer;">
                                     <span class="input-group-text"
                                           title="{{showPassword ? 'Hide Password': 'Show Password'}}">
                                         <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i></span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="f.password.invalid && (f.password.touched || f.password.dirty) || submitted">
+                                        <small *ngIf="f.password.errors?.required" class="text-danger">Password
+                                            Required</small>
+                                        <small *ngIf="f.password.errors?.minlength" class="text-danger">Password should be
+                                            minimum 6 characters</small>
                                     </div>
                                 </div>
-                                <div *ngIf="f.password.invalid && (f.password.touched || f.password.dirty) || submitted">
-                                    <small *ngIf="f.password.errors?.required" class="text-danger">Password
-                                        Required</small>
-                                    <small *ngIf="f.password.errors?.minlength" class="text-danger">Password should be
-                                        minimum 6 characters</small>
+
+                                <div *ngIf="error" class="text-center">
+                                    <span class="text-danger">{{error}}</span>
                                 </div>
-                            </div>
 
-                            <div *ngIf="error" class="text-center">
-                                <span class="text-danger">{{error}}</span>
-                            </div>
+                                <div class="text-center pt-4">
+                                    <button class="btn btn-danger w-100" type="submit">Login</button>
+                                </div>
 
-                            <div class="text-center pt-4">
-                                <button class="btn btn-danger w-100" type="submit">Login</button>
-                            </div>
+                                <!--            <div class="text-center pt-3">-->
+                                <!--              <a class="btn btn-link text-primary" href="#">Forgot Your Password?</a>-->
+                                <!--            </div>-->
+                            </form>
+                        </div>
 
-                            <!--            <div class="text-center pt-3">-->
-                            <!--              <a class="btn btn-link text-primary" href="#">Forgot Your Password?</a>-->
-                            <!--            </div>-->
-                        </form>
-                    </div>
-
-                    <div aria-labelledby="pills-register-tab" class="tab-pane fade" id="pills-register" role="tabpanel">
-                        <app-signup></app-signup>
+                        <div aria-labelledby="pills-register-tab" class="tab-pane fade" id="pills-register" role="tabpanel">
+                            <app-signup></app-signup>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container py-4">
+            <div class="copyright">
+                &copy; Copyright <strong><span>VRP</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="#">Sravan Kumar</a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+
+
+
 </div>
+

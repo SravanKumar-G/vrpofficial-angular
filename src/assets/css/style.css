@@ -2169,7 +2169,7 @@ h6 {
 # Top Bar
 --------------------------------------------------------------*/
 #topbar {
-    background: #106eea;
+    background: #c7a31fd4;
     height: 40px;
     font-size: 14px;
     transition: all 0.5s;
@@ -2531,6 +2531,8 @@ h6 {
 
 #hero .container {
     position: relative;
+    min-width: 100%;
+    padding: 0;
 }
 
 #hero h1 {
@@ -2764,7 +2766,7 @@ section {
 }
 
 .featured-services .icon-box:hover::before {
-    background: #106eea;
+    /*background: #106eea;*/
     top: 0;
     border-radius: 0px;
 }
@@ -2783,6 +2785,7 @@ section {
 .featured-services .title {
     font-weight: 700;
     margin-bottom: 15px;
+    margin-top: 15px;
     font-size: 18px;
 }
 
@@ -2966,15 +2969,15 @@ section {
 .services .icon-box {
     text-align: center;
     border: 1px solid #e2eefd;
-    padding: 80px 20px;
+    padding: 20px 20px;
     transition: all ease-in-out 0.3s;
     background: #fff;
 }
 
 .services .icon-box .icon {
     margin: 0 auto;
-    width: 64px;
-    height: 64px;
+    /*width: 64px;*/
+    /*height: 64px;*/
     background: #f1f6fe;
     border-radius: 4px;
     border: 1px solid #deebfd;
@@ -3015,19 +3018,18 @@ section {
 
 .services .icon-box:hover h4 a,
 .services .icon-box:hover .icon i {
-    color: #106eea;
+    /*color: #106eea;*/
 }
 
 .services .icon-box:hover .icon {
-    border-color: #106eea;
+    /*border-color: #106eea;*/
 }
-
-/*--------------------------------------------------------------
+    /*--------------------------------------------------------------
 # Testimonials
 --------------------------------------------------------------*/
 .testimonials {
     padding: 80px 0;
-    background: url("../img/testimonials-bg.jpg") no-repeat;
+    background: url("../../assets/Images/IMG_20210114_190200.jpg") no-repeat;
     background-position: center center;
     background-size: cover;
     position: relative;
@@ -3040,7 +3042,7 @@ section {
     right: 0;
     top: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgb(201 173 36 / 70%);
 }
 
 .testimonials .section-header {
