@@ -2219,6 +2219,8 @@ h6 {
     z-index: 997;
     height: 86px;
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
 }
 
 #header.fixed-top {
@@ -2756,7 +2758,7 @@ section {
 .featured-services .icon-box::before {
     content: "";
     position: absolute;
-    background: #cbe0fb;
+    background: #5ab359;
     right: 0;
     left: 0;
     bottom: 0;
@@ -3029,12 +3031,18 @@ section {
 --------------------------------------------------------------*/
 .testimonials {
     padding: 80px 0;
-    background: url("../../assets/Images/IMG_20210114_190200.jpg") no-repeat;
+    background: url("../../assets/Images/web front page copy.jpg") no-repeat;
     background-position: center center;
     background-size: cover;
     position: relative;
+    text-align: center;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.4);
 }
-
+.testimonials h4{
+    font-size: 60px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
 .testimonials::before {
     content: "";
     position: absolute;
@@ -3042,7 +3050,7 @@ section {
     right: 0;
     top: 0;
     bottom: 0;
-    background: rgb(201 173 36 / 70%);
+    /*background: rgb(201 173 36 / 70%);*/
 }
 
 .testimonials .section-header {
