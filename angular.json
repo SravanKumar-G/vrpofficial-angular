@@ -18,15 +18,23 @@
             "polyfills": "src/polyfills.ts",
             "assets": ["src/assets", "src/favicon.ico"],
             "styles": [
+              "src/assets/vendor/aos/aos.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "src/assets/css/style.css"
+              "src/assets/css/style.css",
+              "src/assets/vendor/bootstrap-icons/bootstrap-icons.css",
+              "src/assets/vendor/boxicons/css/boxicons.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "src/assets/vendor/aos/aos.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/vendor/glightbox/js/glightbox.min.js",
+              "src/assets/vendor/swiper/swiper-bundle.min.js",
+              "src/assets/vendor/waypoints/noframework.waypoints.js",
+              "src/assets/js/main.js"
             ],
             "aot": false,
             "vendorChunk": true,

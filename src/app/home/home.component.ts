@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 })
 export class HomeComponent implements OnInit {
 
+  public signupHideShow = false;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -48,6 +49,24 @@ export class HomeComponent implements OnInit {
     });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+    var countDownDate = new Date("June 2, 2023 0:0:0").getTime();
+
+    var x = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = countDownDate - now;
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      // @ts-ignore
+      document.getElementById('timer').innerHTML = days + "d " + hours + "h "
+          + minutes + "m " + seconds + "s ";
+      if (distance < 0) {
+        clearInterval(x);
+        // @ts-ignore
+        document.getElementById("timer").innerHTML = "EXPIRED";
+      }
+    }, 1000);
   }
 
   onSubmit(): void {
@@ -78,5 +97,13 @@ export class HomeComponent implements OnInit {
 
   togglePasswordVisibility(showOrHide: any) {
     this.showPassword = showOrHide;
+  }
+
+  signupHideShowFun() {
+    if (this.signupHideShow){
+      this.signupHideShow = false;
+    }else {
+      this.signupHideShow = true;
+    }
   }
 }
