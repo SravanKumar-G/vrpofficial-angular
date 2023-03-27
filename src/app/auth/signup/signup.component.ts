@@ -95,7 +95,7 @@ export class SignupComponent implements OnInit {
       employmentType: new FormControl('', [Validators.required]),
       dependents: new FormControl('', [Validators.required]),
       interestInPolitics: new FormControl('Yes', [Validators.required]),
-      isContestInElection: new FormControl('', [Validators.required]),
+      isContestInElection: new FormControl('Yes', [Validators.required]),
       positionToContest: new FormControl('', [Validators.required]),
       contestingConstituency: new FormControl('', [Validators.required]),
       typeOfContribution: new FormControl('', [Validators.required]),
@@ -208,5 +208,9 @@ export class SignupComponent implements OnInit {
 
   toggleConfirmPasswordVisibility(showOrHide: any) {
     this.showConfirmPassword = showOrHide;
+  }
+
+  getConsByDistId($event: Event) {
+    
   }
 }
