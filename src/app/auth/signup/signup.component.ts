@@ -211,6 +211,6 @@ export class SignupComponent implements OnInit {
   }
 
   getConsByDistId($event: Event) {
-    
+
   }
 }
