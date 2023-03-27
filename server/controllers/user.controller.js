@@ -7,6 +7,7 @@ const StateColl = require("../models/states.model");
 const DistColl = require("../models/districts.model");
 const MandalColl = require("../models/mandals.model");
 const ConstColl = require("../models/constituencies.model");
+const ParConstColl = require("../models/parConstituencies.model");
 
 const userSchema = Joi.object({
   firstName: Joi.string().required(),
@@ -149,10 +150,16 @@ async function deleteClientUser(id, next) {
 }
 
 async function populateName (userData) {
+  let consti;
   let state = userData.state ? await StateColl.findOne({_id: userData.state}) : {name: ''};
   const dist = userData.district ? await DistColl.findOne({_id: userData.district}) : {name: ''};
   const mand = userData.mandal ? await MandalColl.findOne({_id: userData.mandal}) : {name: ''};
-  const consti = userData.contestingConstituency ? await ConstColl.findOne({_id: userData.contestingConstituency}) :{name: ''};
+  if (userData.positionToContest[0] === 'MP') {
+    consti = userData.contestingConstituency ? await ParConstColl.findOne({_id: userData.contestingConstituency}) : {name: ''};
+  }else{
+    consti = userData.contestingConstituency ? await ConstColl.findOne({_id: userData.contestingConstituency}) : {name: ''};
+  }
+  console.log(userData.contestingConstituency)
   userData.state = state.name;
   userData.district = dist.name;
   userData.mandal = mand.name;

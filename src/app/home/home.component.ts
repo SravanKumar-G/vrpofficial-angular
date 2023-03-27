@@ -49,35 +49,7 @@ export class HomeComponent implements OnInit {
     });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-    var countDownDate = new Date("June 2, 2023 0:0:0").getTime();
-
-    var x = setInterval(function() {
-      var now = new Date().getTime();
-      var distance = countDownDate - now;
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24)) <= 9 ?
-          '0' + Math.floor(distance / (1000 * 60 * 60 * 24)) : Math.floor(distance / (1000 * 60 * 60 * 24));
-      const daysArray = days.toString().split('');
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) <= 9 ?
-          '0' + Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) : Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const hoursArray = hours.toString().split('');
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) <= 9 ?
-          '0' + Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) : Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const minArray = minutes.toString().split('');
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000) <= 9 ?
-          '0' + Math.floor((distance % (1000 * 60)) / 1000) : Math.floor((distance % (1000 * 60)) / 1000);
-      const secArray = seconds.toString().split('');
-      // @ts-ignore
-      document.getElementById('timer').innerHTML =
-          "<div style='margin-left: 25px;'><span>" + daysArray[0] + "</span> <span>" + daysArray[0] + "</span> <p>Days</p></div>" +
-          "<div style='margin-left: 25px;'><span>" + hoursArray[0] + "</span> <span>" + hoursArray[1] + "</span> <p>Hours</p></div>" +
-          "<div style='margin-left: 25px;'><span>" + minArray[0] + "</span> <span>" + minArray[1] + "</span> <p>Minutes</p></div>" +
-          "<div style='margin-left: 25px;'><span>" + secArray[0] + "</span> <span>" + secArray[1] + "</span> <p>Seconds</p></div>";
-      if (distance < 0) {
-        clearInterval(x);
-        // @ts-ignore
-        document.getElementById("timer").innerHTML = "EXPIRED";
-      }
-    }, 1000);
+    this.getTimer();
   }
 
   onSubmit(): void {
@@ -116,5 +88,37 @@ export class HomeComponent implements OnInit {
     }else {
       this.signupHideShow = true;
     }
+  }
+
+  getTimer(): any {
+    var countDownDate = new Date("June 2, 2023 0:0:0").getTime();
+
+    var x = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = countDownDate - now;
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24)) <= 9 ?
+          '0' + Math.floor(distance / (1000 * 60 * 60 * 24)) : Math.floor(distance / (1000 * 60 * 60 * 24));
+      const daysArray = days.toString().split('');
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) <= 9 ?
+          '0' + Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) : Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const hoursArray = hours.toString().split('');
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) <= 9 ?
+          '0' + Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) : Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const minArray = minutes.toString().split('');
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000) <= 9 ?
+          '0' + Math.floor((distance % (1000 * 60)) / 1000) : Math.floor((distance % (1000 * 60)) / 1000);
+      const secArray = seconds.toString().split('');
+      // @ts-ignore
+      document.getElementById('timer').innerHTML =
+          "<div style='margin-left: 25px;'><span>" + daysArray[0] + "</span> <span>" + daysArray[0] + "</span> <p>Days</p></div>" +
+          "<div style='margin-left: 25px;'><span>" + hoursArray[0] + "</span> <span>" + hoursArray[1] + "</span> <p>Hours</p></div>" +
+          "<div style='margin-left: 25px;'><span>" + minArray[0] + "</span> <span>" + minArray[1] + "</span> <p>Minutes</p></div>" +
+          "<div style='margin-left: 25px;'><span>" + secArray[0] + "</span> <span>" + secArray[1] + "</span> <p>Seconds</p></div>";
+      if (distance < 0) {
+        clearInterval(x);
+        // @ts-ignore
+        document.getElementById("timer").innerHTML = "EXPIRED";
+      }
+    }, 1000);
   }
 }

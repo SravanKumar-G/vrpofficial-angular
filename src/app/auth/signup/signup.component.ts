@@ -42,6 +42,7 @@ export class SignupComponent implements OnInit {
     {key: 'Policy/Research support', value: '10'},
     {key: 'Others', value: '11'},
   ]
+  employmentType: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,7 +73,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllStates();
-    this.getAllConstituencies();
+    // this.getAllConstituencies();
     this.signUpForm = this.formBuilder.group({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
@@ -92,12 +93,13 @@ export class SignupComponent implements OnInit {
       mandal: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
       employmentStatus: new FormControl('Yes', [Validators.required]),
-      employmentType: new FormControl('', [Validators.required]),
+      employmentType: new FormControl(''),
       dependents: new FormControl('', [Validators.required]),
       interestInPolitics: new FormControl('Yes', [Validators.required]),
-      isContestInElection: new FormControl('Yes', [Validators.required]),
-      positionToContest: new FormControl('', [Validators.required]),
-      contestingConstituency: new FormControl('', [Validators.required]),
+      isContestInElection: new FormControl('Yes'),
+      positionToContest: new FormControl(''),
+      contestDistrict: new FormControl(''),
+      contestingConstituency: new FormControl(''),
       typeOfContribution: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       acceptConsent: new FormControl('', [Validators.required]),
@@ -138,7 +140,8 @@ export class SignupComponent implements OnInit {
       dependents: this.r.dependents.value,
       interestInPolitics: this.r.interestInPolitics.value,
       isContestInElection: this.r.isContestInElection.value,
-      positionToContest: this.r.positionToContest.value,
+      positionToContest: [this.r.positionToContest.value],
+      contestDistrict: this.r.contestDistrict.value,
       contestingConstituency: this.r.contestingConstituency.value,
       typeOfContribution: this.r.typeOfContribution.value,
       description: this.r.description.value,
@@ -168,7 +171,7 @@ export class SignupComponent implements OnInit {
   }
 
   getDistrictsByStateId(event: any): void {
-    const stateId = event.target.value;
+    const stateId = event ? event.target.value : '63ff22fca2fa8ae3ae31d3f6';
     this.apiService.get(this.apiUrls.getDistrictsByState + stateId).subscribe((res: any) => {
       if (res) {
         this.districts = res.districts;
@@ -210,7 +213,20 @@ export class SignupComponent implements OnInit {
     this.showConfirmPassword = showOrHide;
   }
 
-  getConsByDistId($event: Event) {
-
+  getConsByDistId(event: any, position: any) {
+    let apiUrl;
+    const distId = event.target.value;
+    if (position === 'MP') {
+      apiUrl = this.apiUrls.getParliamentConst;
+    }else if (position === 'MLA' || position === 'MLC') {
+      apiUrl = this.apiUrls.getConstituenciesByDistrict + distId;
+    }
+    this.apiService.get(apiUrl).subscribe((res: any) => {
+      if (res) {
+        this.constituencies = res.constituencies;
+      }
+    }, erorr => {
+      this.error = erorr.error.message;
+    });
   }
 }

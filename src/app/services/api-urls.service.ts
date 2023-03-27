@@ -26,6 +26,7 @@ export class ApiUrlsService {
   getDistrictsByState ='/api/v1/noauth/getDistrictsByStateId/';
   getMandalsByDistrict ='/api/v1/noauth/getMandalsByDistrict/';
   getConstituenciesByDistrict ='/api/v1/noauth/getConstituenciesByDistrict/';
+  getParliamentConst ='/api/v1/noauth/getParliamentConst';
   getAllConstituencies ='/api/v1/noauth/getAllConstituencies/';
 
 }
