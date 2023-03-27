@@ -40,6 +40,12 @@ router.route('/getConstituenciesByDistrict/:distId').get(function (req, res) {
     });
 });
 
+router.route('/getParliamentConst').get(function (req, res) {
+    noAuthController.getParConst( result => {
+        res.status(result.status).json(result);
+    });
+});
+
 router.route('/getAllConstituencies').get(function (req, res) {
     noAuthController.getAllConstituencies(result => {
         res.status(result.status).json(result);

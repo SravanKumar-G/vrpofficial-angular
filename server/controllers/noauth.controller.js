@@ -4,6 +4,7 @@ const StatesColl = require("../models/states.model");
 const DistrictsColl = require("../models/districts.model");
 const MandalsColl = require("../models/mandals.model");
 const ConstituenciesColl = require("../models/constituencies.model");
+const ParConstituenciesColl = require("../models/parConstituencies.model");
 
 
 exports.getAllStates = async (next) => {
@@ -101,6 +102,20 @@ exports.getAllConstituencies = async ( next) => {
     }catch (e) {
         console.log(e);
         next({status: 500, data: e, message: 'Error in loading Constituencies data..!'})
+    }
+}
+
+exports.getParConst = async ( next) => {
+    try{
+        const constituencies = await ParConstituenciesColl.find();
+        if (constituencies) {
+            next({status: 200, constituencies, message: 'Successfully fetched MP Constituencies data..!'});
+        } else {
+            next({status: 400, data: [], message: 'no data found..!'});
+        }
+    }catch (e) {
+        console.log(e);
+        next({status: 500, data: e, message: 'Error in loading MP Constituencies data..!'})
     }
 }
 

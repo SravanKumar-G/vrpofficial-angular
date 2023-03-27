@@ -320,9 +320,9 @@
                            name="employmentType" type="radio" value="temEmp">
                     <label class="form-check-label" for="employmentType4">Temporarily Employment</label>
                 </div>
-                <div *ngIf="(r.employmentType.invalid && (r.employmentType.touched || r.employmentType.dirty)) || submitted"
+                <div *ngIf="employmentType"
                      class="mt-1">
-                    <span *ngIf="r.employmentType.errors?.required"
+                    <span
                           class="text-danger">Employment Type is required</span>
                 </div>
             </div>
@@ -375,80 +375,30 @@
                     <span *ngIf="r.isContestInElection.errors?.required" class="text-danger">Field is required</span>
                 </div>
             </div>
-            <!--      <div class="form-group col-sm-12 col-xs-12">-->
-            <!--          <div class="label-text form-check-label">If yes how would you like to contest in election ?: <span class="mandatory-field">*</span></div>-->
-            <!--        <div class="form-check">-->
-            <!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest1"-->
-            <!--                 name="positionToContest" type="checkbox" value="MLA">-->
-            <!--          <label class="form-check-label" for="isContestInElection1">MLA</label>-->
-            <!--        </div>-->
-            <!--        <div class="form-check">-->
-            <!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest2"-->
-            <!--                 name="positionToContest" type="checkbox" value="MP">-->
-            <!--          <label class="form-check-label" for="isContestInElection2">MP</label>-->
-            <!--        </div>-->
-            <!--        <div class="form-check">-->
-            <!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest3"-->
-            <!--                 name="positionToContest" type="checkbox" value="MLC">-->
-            <!--          <label class="form-check-label" for="positionToContest3">MLC</label>-->
-            <!--        </div>-->
-            <!--        <div class="form-check">-->
-            <!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest4"-->
-            <!--                 name="positionToContest" type="checkbox" value="CORPORATOR">-->
-            <!--          <label class="form-check-label" for="positionToContest4">CORPORATOR</label>-->
-            <!--        </div>-->
-            <!--        <div class="form-check">-->
-            <!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest5"-->
-            <!--                 name="positionToContest" type="checkbox" value="COUNCELLOR">-->
-            <!--          <label class="form-check-label" for="positionToContest5">COUNCELLOR</label>-->
-            <!--        </div>-->
-            <!--        <div class="form-check">-->
-            <!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest6"-->
-            <!--                 name="positionToContest" type="checkbox" value="SARPANCH">-->
-            <!--          <label class="form-check-label" for="positionToContest6">SARPANCH</label>-->
-            <!--        </div>-->
-            <!--        <div class="form-check">-->
-            <!--          <input class="form-check-input" formControlName="positionToContest" id="positionToContest7"-->
-            <!--                 name="positionToContest" type="checkbox" value="OTHERS">-->
-            <!--          <label class="form-check-label" for="positionToContest7">OTHERS</label>-->
-            <!--        </div>-->
-            <!--          <div *ngIf="(r.positionToContest.invalid && (r.positionToContest.touched || r.positionToContest.dirty)) || submitted" class="mt-1">-->
-            <!--            <span *ngIf="r.positionToContest.errors?.required" class="text-danger">Field is required</span>-->
-            <!--          </div>-->
-            <!--      </div>-->
-            <div class="form-group col-sm-6 col-xs-12">
+            <div class="form-group col-sm-6 col-xs-12" *ngIf="r.interestInPolitics.value === 'Yes' && r.isContestInElection.value === 'Yes'">
                 <div class="label-text form-check-label">If yes how would you like to contest in election ?: <span
                         class="mandatory-field">*</span></div>
-                <ng-select
-                        class="ng-select-form-control-sm"
-                        [items]="positionArray"
-                        [multiple]="true"
-                        bindLabel="key"
-                        [closeOnSelect]="false"
-                        bindValue="value"
-                        placeholder="Select Options"
-                        formControlName="positionToContest"
-                >
-                    <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
-                        <div class="ng-value" *ngFor="let item of items | slice:0:1" [hidden]="items.length > 1">
-                            <span class="ng-value-label">{{item.key}}</span>
-                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                        </div>
-                        <div class="ng-value" *ngIf="items.length > 1">
-                            <span class="ng-value-label">{{items.length}} Options Selected...</span>
-                        </div>
-                    </ng-template>
-                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                        <input id="item-{{index}}-roles" type="checkbox" [ngModel]="item$.selected" [ngModelOptions]="{standalone: true}"/>
-                        {{item.key}}
-                    </ng-template>
-                    </ng-select>
+                <select (change)="getDistrictsByStateId('')" class="form-control" formControlName="positionToContest">
+                    <option selected value="">--Select Position--</option>
+                    <option *ngFor="let pos of positionArray" value="{{pos.value}}">{{pos.key}}</option>
+                </select>
+
                 <div *ngIf="(r.positionToContest.invalid && (r.positionToContest.touched || r.positionToContest.dirty)) || submitted"
                      class="mt-1">
                     <span *ngIf="r.positionToContest.errors?.required" class="text-danger">Field is required</span>
                 </div>
             </div>
-            <div class="form-group col-sm-6 col-xs-12">
+            <div class="form-group col-sm-6 col-xs-12" *ngIf="r.positionToContest.value && r.interestInPolitics.value === 'Yes' && r.isContestInElection.value === 'Yes'">
+                <div class="label-text form-check-label">District: <span class="mandatory-field">*</span></div>
+                <select (change)="getConsByDistId($event, r.positionToContest.value)" class="form-control" formControlName="contestDistrict">
+                    <option selected value="">--Select District--</option>
+                    <option *ngFor="let district of districts" value="{{district._id}}">{{district.name}}</option>
+                </select>
+                <div *ngIf="(r.contestDistrict.invalid && (r.contestDistrict.touched || r.contestDistrict.dirty)) || submitted" class="mt-1">
+                    <span *ngIf="r.contestDistrict.errors?.required" class="text-danger">Contest District is required</span>
+                </div>
+            </div>
+            <div class="form-group col-sm-6 col-xs-12" *ngIf="r.positionToContest.value && r.interestInPolitics.value === 'Yes' && r.isContestInElection.value === 'Yes'">
                 <div class="label-text form-check-label">In which Constituency would you like to contest in election?
                     <span class="mandatory-field">*</span></div>
                 <select class="form-control" formControlName="contestingConstituency">
