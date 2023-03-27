@@ -1,82 +1,4 @@
-<div>
-    <section id="topbar" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-center">
-        <div class="contact-info d-flex align-items-center">
-            <span>Join Our Movement <a href="#">Sign up</a> విద్యార్దుల రాజకీయపార్టీలో చేరండి</span>
-<!--            <i class="bi bi-envelope d-flex align-items-center">-->
-<!--                <a href="mailto:contact@example.com">contact@example.com</a>-->
-<!--            </i>-->
-<!--            <i class="bi bi-phone d-flex align-items-center ms-4"><span></span></i>-->
-        </div>
-<!--        <div class="social-links d-none d-md-flex align-items-center">-->
-<!--            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>-->
-<!--            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>-->
-<!--            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>-->
-<!--            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>-->
-<!--        </div>-->
-    </div>
-</section>
-
-<!-- ======= Header ======= -->
-    <header id="header" class="d-flex align-items-center">
-    <div class="container-fluid d-flex align-items-center justify-content-around">
-
-<!--        <h1 class="logo"><a href="index.html">BizLand<span>.</span></a></h1>-->
-        <span><img src="../../assets/Images/vrplogo.jpg"/></span>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li class="dropdown"><a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#">Election Symbol</a></li>
-                        <li><a href="#">Leadership</a></li>
-                        <li><a href="#">State Secretary</a></li>
-                        <li><a href="#">Why We Are Different</a></li>
-                    </ul>
-                </li>
-<!--                <li><a class="nav-link scrollto" href="#services">Services</a></li>-->
-<!--                <li><a class="nav-link scrollto " href="#portfolio">Gallery</a></li>-->
-                <li class="dropdown"><a href="#"><span>Media</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="#">News</a></li>
-                        <li><a href="#">Press Realese</a></li>
-                        <li><a href="#">Videos</a></li>
-                        <li><a href="#">Offical Spokepersopn</a></li>
-                        <li><a href="#portfolio">Gallery</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a href="#"><span>Elections</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-<!--                        <li><a href="#">Drop Down 1</a></li>-->
-<!--                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>-->
-<!--                            <ul>-->
-<!--                                <li><a href="#">Deep Drop Down 1</a></li>-->
-<!--                                <li><a href="#">Deep Drop Down 2</a></li>-->
-<!--                                <li><a href="#">Deep Drop Down 3</a></li>-->
-<!--                                <li><a href="#">Deep Drop Down 4</a></li>-->
-<!--                                <li><a href="#">Deep Drop Down 5</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-                        <li><a href="#">Manifest</a></li>
-                        <li><a href="#">Khammam  Elections</a></li>
-<!--                        <li><a href="#">Drop Down 4</a></li>-->
-                    </ul>
-                </li>
-                <li><a class="nav-link scrollto" href="#Registration" (click)="signupHideShowFun()">Registration</a></li>
-                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
-    </div>
-</header>
-
-    <!-- End Header -->
-
+<app-header></app-header>
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center" *ngIf="!signupHideShow">
         <div class="container" data-aos="zoom-out" data-aos-delay="100" >
@@ -97,8 +19,7 @@
     </section>
     <!-- End Hero -->
 
-    <main id="main"  *ngIf="!signupHideShow">
-
+    <main id="main">
         <!-- ======= Featured Services Section ======= -->
         <section id="featured-services" class="featured-services">
             <div class="container" data-aos="fade-up">
@@ -139,41 +60,14 @@
                             <span class="description"><a href="">Continue Reading</a></span>
                         </div>
                     </div>
-
-<!--                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">-->
-<!--                        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">-->
-<!--                            <div class="icon"><i class="bx bx-file"></i></div>-->
-<!--                            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>-->
-<!--                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">-->
-<!--                        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">-->
-<!--                            <div class="icon"><i class="bx bx-tachometer"></i></div>-->
-<!--                            <h4 class="title"><a href="">Magni Dolores</a></h4>-->
-<!--                            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">-->
-<!--                        <div class="icon-box" data-aos="fade-up" data-aos-delay="400">-->
-<!--                            <div class="icon"><i class="bx bx-world"></i></div>-->
-<!--                            <h4 class="title"><a href="">Nemo Enim</a></h4>-->
-<!--                            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
                 </div>
-
             </div>
         </section>
         <!-- End Featured Services Section -->
 
 
-        <!--        Videos Section Start-->
-
-        <section id="featured-services" class="featured-services section-bg">
+        <!--Videos Section Start-->
+        <section id="featured-videos" class="featured-services section-bg">
             <div class="container" data-aos="fade-up">
                 <div class="row justify-content-around">
                     <div class="section-title">
@@ -283,8 +177,7 @@
         </section>
         <!-- End Services Section -->
 
-
-        <!-- ======= Portfolio Section ======= -->
+<!--        Gallery-->
         <section id="portfolio" class="portfolio section-bg-custom">
             <div class="container" data-aos="fade-up">
 
@@ -292,16 +185,16 @@
                     <h2>Gallery</h2>
                 </div>
 
-<!--                <div class="row" data-aos="fade-up" data-aos-delay="100">-->
-<!--                    <div class="col-lg-12 d-flex justify-content-center">-->
-<!--                        <ul id="portfolio-flters">-->
-<!--                            <li data-filter="*" class="filter-active">All</li>-->
-<!--                            <li data-filter=".filter-app">App</li>-->
-<!--                            <li data-filter=".filter-card">Card</li>-->
-<!--                            <li data-filter=".filter-web">Web</li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="row" data-aos="fade-up" data-aos-delay="100">-->
+                <!--                    <div class="col-lg-12 d-flex justify-content-center">-->
+                <!--                        <ul id="portfolio-flters">-->
+                <!--                            <li data-filter="*" class="filter-active">All</li>-->
+                <!--                            <li data-filter=".filter-app">App</li>-->
+                <!--                            <li data-filter=".filter-card">Card</li>-->
+                <!--                            <li data-filter=".filter-web">Web</li>-->
+                <!--                        </ul>-->
+                <!--                    </div>-->
+                <!--                </div>-->
 
                 <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
@@ -312,12 +205,12 @@
                         </div>
                     </div>
 
-<!--                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">-->
-<!--                        <img src="../../assets/Images/FB_IMG_1612290508283.jpg" class="img-fluid" alt="">-->
-<!--                        <div class="portfolio-info">-->
-<!--                            <a href="../../assets/Images/FB_IMG_1612290508283.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i>Zoom</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <!--                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">-->
+                    <!--                        <img src="../../assets/Images/FB_IMG_1612290508283.jpg" class="img-fluid" alt="">-->
+                    <!--                        <div class="portfolio-info">-->
+                    <!--                            <a href="../../assets/Images/FB_IMG_1612290508283.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i>Zoom</a>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                         <img src="../../assets/Images/FB_IMG_1612290462692.jpg" class="img-fluid" alt="">
@@ -337,7 +230,7 @@
                         <img src="../../assets/Images/Capture%202021-02-26%2023.05.33.jpg" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <a href="../../assets/Images/Capture%202021-02-26%2023.05.33.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i>Zoom</a>
-<!--                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>-->
+                            <!--                            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>-->
                         </div>
                     </div>
 
@@ -373,194 +266,12 @@
 
             </div>
         </section>
-        <!-- End Portfolio Section -->
 
 
-<!--         ======= Testimonials Section ======= -->
-        <section id="testimonials" class="testimonials">
-            <div class="container" data-aos="zoom-in" data-aos-delay="100">
-                    <h4>Thank you!</h4>
-                    <p style="font-size: 25px; color: #FFFFFF">Voting serves all of us. Thank you for your commitment. </p>
-            </div>
-        </section>
-        <section  class="" style="text-align: center">
-            <div class="container" data-aos="zoom-in" data-aos-delay="100" style="display: flex;justify-content: space-around;">
-                <p id="timer" class="timer" style="display: flex;margin-bottom: 0"></p>
-            </div>
-        </section>
     </main>
-    <div class="container mt-5 mb-5" *ngIf="signupHideShow">
-        <h3 class="text-uppercase">Become a Member</h3>
-        <h5 style="color: cornflowerblue;">VR Party is India’s fastest growing political party. Join as a member today and
-            help shape the future course of politics in India.</h5>
-        <div class="mt-5 signup-cont" style="box-shadow: -1px 2px 15px 1px #ccccdc; border-radius: 10px;">
-            <div class="card mx-auto border-0 col-sm-12 col-xs-12">
-                <div class="card-header border-bottom-0 bg-transparent">
-                    <ul class="nav nav-tabs justify-content-center pt-4" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a aria-controls="pills-login" aria-selected="true"
-                               class="nav-link active text-primary"
-                               data-toggle="pill"
-                               href="#pills-login"
-                               id="pills-login-tab"
-                               role="tab">Register</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a aria-controls="pills-register" aria-selected="false" class="nav-link text-primary"
-                               data-toggle="pill"
-                               href="#pills-register"
-                               id="pills-register-tab"
-                               role="tab">Login</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card-body pb-4">
-                    <div class="tab-content" id="pills-tabContent">
-                        <div aria-labelledby="pills-login-tab" class="tab-pane fade show active" id="pills-login"
-                             role="tabpanel">
-                            <app-signup></app-signup>
-                        </div>
-
-                        <div aria-labelledby="pills-register-tab" class="tab-pane fade" id="pills-register" role="tabpanel">
-                            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-                                <div class="form-group">
-                                    <div class="label-text form-check-label">Mobile Number<span
-                                            class="mandatory-field">*</span></div>
-                                    <input [ngClass]="{'is-invalid': submitted && f.phoneNumber.errors}" autofocus
-                                           class="form-control" formControlName="phoneNumber" maxlength="10" minlength="10"
-                                           name="phoneNumber"
-                                           placeholder="Mobile Number"
-                                           required
-                                           type="text">
-
-                                    <div *ngIf="(f.phoneNumber.invalid && (f.phoneNumber.touched || f.phoneNumber.dirty)) || submitted"
-                                         class="mt-1">
-                                        <span *ngIf="f.phoneNumber.errors?.required" class="text-danger">Mobile Number is required</span>
-                                        <span *ngIf="f.phoneNumber.errors?.pattern || f.phoneNumber.errors?.minlength"
-                                              class="text-danger">Mobile Number must be a 10 digit valid Number</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="label-text form-check-label">Password<span class="mandatory-field">*</span>
-                                    </div>
-                                    <div class="input-group">
-                                        <input [ngClass]="{'is-invalid': submitted && f.password.errors}"
-                                               class="form-control" formControlName="password" id="password" name="password"
-                                               placeholder="Password"
-                                               required
-                                               type="{{showPassword ? 'text' : 'password'}}">
-                                        <div (click)="togglePasswordVisibility(!showPassword)" class="input-group-append pointer-event"
-                                             style="cursor: pointer;">
-                                    <span class="input-group-text"
-                                          title="{{showPassword ? 'Hide Password': 'Show Password'}}">
-                                        <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i></span>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="f.password.invalid && (f.password.touched || f.password.dirty) || submitted">
-                                        <small *ngIf="f.password.errors?.required" class="text-danger">Password
-                                            Required</small>
-                                        <small *ngIf="f.password.errors?.minlength" class="text-danger">Password should be
-                                            minimum 6 characters</small>
-                                    </div>
-                                </div>
-
-                                <div *ngIf="error" class="text-center">
-                                    <span class="text-danger">{{error}}</span>
-                                </div>
-
-                                <div class="text-center pt-4">
-                                    <button class="btn btn-danger w-100" type="submit">Login</button>
-                                </div>
-
-                                <!--            <div class="text-center pt-3">-->
-                                <!--              <a class="btn btn-link text-primary" href="#">Forgot Your Password?</a>-->
-                                <!--            </div>-->
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <!-- ======= Footer ======= -->
-    <footer id="footer">
-
-        <div class="footer-newsletter">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <h4>Join Our Newsletter</h4>
-<!--                        <p>for updates please join</p>-->
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-4 col-md-6 footer-contact">
-                        <h3>VRP Officials<span>.</span></h3>
-                        <p>
-                            Nagole <br>
-                            Uppal, Telangana, 500039<br>
-                            India <br><br>
-                            <strong>Phone:</strong> +91 8008295588<br>
-                            <strong>Email:</strong> info@vrpofficials.com<br>
-                        </p>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 footer-links">
-                        <h4>Our Social Networks</h4>
-                        <div class="social-links mt-3">
-                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="container py-4">
-            <div class="copyright">
-                &copy; Copyright <strong><span>VRP Officials</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bizland-bootstrap-business-template/ -->
-                Designed and Developed by <a href="http://vrpofficials.com/">విద్యార్థుల రాజకీయ పార్టీ</a>
-            </div>
-        </div>
-    </footer><!-- End Footer -->
-
-
-
-
-</div>
+        <app-footer></app-footer>
+    <!-- End Footer -->
 

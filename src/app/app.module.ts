@@ -21,6 +21,12 @@ import { ngfModule } from "angular-file";
 import { HomeComponent } from './home/home.component';
 import { NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
 import {CatchErrorInterceptor} from "@app/interceptors/http-error.interceptor";
+import { AboutComponent } from './about/about.component';
+import { HeaderComponent } from './header/header.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { FooterComponent } from './footer/footer.component';
+import { ContactComponent } from './contact/contact.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +35,12 @@ import {CatchErrorInterceptor} from "@app/interceptors/http-error.interceptor";
     SignupComponent,
     SpinnerComponent,
     HomeComponent,
+    AboutComponent,
+    HeaderComponent,
+    RegistrationComponent,
+    FooterComponent,
+    ContactComponent,
+    GalleryComponent,
   ],
   imports: [
     BrowserModule,
