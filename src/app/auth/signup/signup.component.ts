@@ -91,17 +91,17 @@ export class SignupComponent implements OnInit {
       district: new FormControl('', [Validators.required]),
       mandal: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
-      employmentStatus: new FormControl('', [Validators.required]),
+      employmentStatus: new FormControl('Yes', [Validators.required]),
       employmentType: new FormControl('', [Validators.required]),
       dependents: new FormControl('', [Validators.required]),
-      interestInPolitics: new FormControl('', [Validators.required]),
+      interestInPolitics: new FormControl('Yes', [Validators.required]),
       isContestInElection: new FormControl('', [Validators.required]),
       positionToContest: new FormControl('', [Validators.required]),
       contestingConstituency: new FormControl('', [Validators.required]),
       typeOfContribution: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       acceptConsent: new FormControl('', [Validators.required]),
-      acceptDeclaration: new FormControl('', [Validators.required]),
+      acceptDeclaration: new FormControl(''),
     }, {
       validator: ConfirmPasswordValidator("password", "confirmPassword")
     });

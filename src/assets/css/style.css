@@ -20,17 +20,6 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     display: block;
 }
 
-body {
-    margin: 0;
-    font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    text-align: left;
-    background-color: #FFF;
-}
-
 ::-moz-selection {
     color: #FFF;
     background-color: #00635a;
@@ -2063,8 +2052,9 @@ body {
 # General
 --------------------------------------------------------------*/
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Josefin Sans', sans-serif !important;
     color: #444444;
+    background: rgb(3, 48, 0) !important;
 }
 
 a {
@@ -2075,15 +2065,6 @@ a {
 a:hover {
     color: #3b8af2;
     text-decoration: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: "Roboto", sans-serif;
 }
 
 /*--------------------------------------------------------------
@@ -2169,7 +2150,7 @@ h6 {
 # Top Bar
 --------------------------------------------------------------*/
 #topbar {
-    background: #c7a31fd4;
+    background: #000;
     height: 40px;
     font-size: 14px;
     transition: all 0.5s;
@@ -2190,7 +2171,6 @@ h6 {
 
 #topbar .contact-info i a {
     line-height: 0;
-    transition: 0.3s;
     transition: 0.3s;
 }
 
@@ -2234,7 +2214,6 @@ h6 {
     line-height: 1;
     font-weight: 600;
     letter-spacing: 0.8px;
-    font-family: "Poppins", sans-serif;
 }
 
 #header .logo a {
@@ -2292,6 +2271,7 @@ h6 {
     white-space: nowrap;
     transition: 0.3s;
     position: relative;
+    text-transform: uppercase;
 }
 
 .navbar a i,
@@ -2516,7 +2496,7 @@ h6 {
 #hero {
     width: 100%;
     height: 75vh;
-    background: url("../img/hero-bg.jpg") top left;
+    /*background: url("../img/hero-bg.jpg") top left;*/
     background-size: cover;
     position: relative;
 }
@@ -2543,7 +2523,6 @@ h6 {
     font-weight: 700;
     line-height: 56px;
     color: #222222;
-    font-family: "Poppins", sans-serif;
 }
 
 #hero h1 span {
@@ -2558,7 +2537,6 @@ h6 {
 }
 
 #hero .btn-get-started {
-    font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     font-weight: 500;
     font-size: 14px;
@@ -2645,6 +2623,9 @@ section {
 
 .section-bg {
     background-color: #f6f9fe;
+}
+.section-bg-custom {
+    background-color: rgb(3, 48, 0);
 }
 
 .section-title {
@@ -2872,7 +2853,6 @@ section {
     text-transform: uppercase;
     display: block;
     font-weight: 600;
-    font-family: "Poppins", sans-serif;
     color: #222222;
 }
 
@@ -2936,7 +2916,6 @@ section {
 .counts .count-box p {
     padding: 0;
     margin: 0;
-    font-family: "Roboto", sans-serif;
     font-size: 14px;
 }
 
@@ -3242,6 +3221,12 @@ section {
     bottom: 20px;
 }
 
+.portfolio-item img{
+    height: 240px !important;
+    width: 100%;
+    object-fit: cover;
+}
+
 /*--------------------------------------------------------------
 # Portfolio Details
 --------------------------------------------------------------*/
@@ -3416,7 +3401,6 @@ section {
     font-size: 36px;
     color: #106eea;
     font-weight: 600;
-    font-family: "Poppins", sans-serif;
     margin-bottom: 20px;
 }
 
@@ -3469,10 +3453,7 @@ section {
     padding: 8px 35px 10px 35px;
     border-radius: 4px;
     color: #fff;
-    transition: none;
     font-size: 14px;
-    font-weight: 400;
-    font-family: "Roboto", sans-serif;
     font-weight: 600;
     transition: 0.3s;
 }
@@ -3520,7 +3501,6 @@ section {
 .faq .faq-list .question {
     display: block;
     position: relative;
-    font-family: #106eea;
     font-size: 18px;
     line-height: 24px;
     font-weight: 400;
@@ -3753,7 +3733,8 @@ section {
 
 #footer .footer-top {
     padding: 60px 0 30px 0;
-    background: #fff;
+    background: rgb(3, 48, 0) !important;
+    color: #fff;
 }
 
 #footer .footer-top .footer-contact {
@@ -3776,14 +3757,12 @@ section {
     font-size: 14px;
     line-height: 24px;
     margin-bottom: 0;
-    font-family: "Roboto", sans-serif;
-    color: #777777;
+    color: #fff;
 }
 
 #footer .footer-top h4 {
     font-size: 16px;
     font-weight: bold;
-    color: #444444;
     position: relative;
     padding-bottom: 12px;
 }
@@ -3816,7 +3795,7 @@ section {
 }
 
 #footer .footer-top .footer-links ul a {
-    color: #777777;
+    color: #fff;
     transition: 0.3s;
     display: inline-block;
     line-height: 1;
@@ -3868,4 +3847,15 @@ section {
         text-align: center;
         padding: 2px 0;
     }
+}
+.timer span{
+    background: #FFFFFF;
+    font-size: 50px;
+    padding: 12px;
+}
+.timer p{
+    margin-top: 5px;
+    color: #fff !important;
+    font-size: 14px;
+    margin-bottom: 0;
 }
