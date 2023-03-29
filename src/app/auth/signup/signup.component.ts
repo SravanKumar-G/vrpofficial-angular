@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "@app/services/auth.service";
 import { ApiServiceService } from "@app/services/api-service.service";
@@ -73,6 +73,19 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllStates();
+
+    function conditionalValidator(predicate: any) {
+      console.log(predicate);
+      return ((formControl: { parent: any; }) => {
+        if (!formControl.parent) {
+          return null;
+        }
+        if (predicate()) {
+        }
+        return null;
+      })
+    }
+
     // this.getAllConstituencies();
     this.signUpForm = this.formBuilder.group({
       firstName: new FormControl('', [Validators.required]),
@@ -93,7 +106,7 @@ export class SignupComponent implements OnInit {
       mandal: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
       employmentStatus: new FormControl('Yes', [Validators.required]),
-      employmentType: new FormControl(''),
+      employmentType: new FormControl('', [conditionalValidator(() => this.signUpForm.get('employmentStatus').value)]),
       dependents: new FormControl('', [Validators.required]),
       interestInPolitics: new FormControl('Yes', [Validators.required]),
       isContestInElection: new FormControl('Yes'),
