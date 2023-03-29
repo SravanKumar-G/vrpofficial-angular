@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  public showMobileMenu = false;
+  public showDropDownMenu = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  toggleMenu(): void {
+    this.showMobileMenu = !this.showMobileMenu;
+  }
+
+  showDropDown() {
+    this.showDropDownMenu = !this.showDropDownMenu;
+  }
 }
