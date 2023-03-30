@@ -21,13 +21,13 @@
     <div class="container-fluid d-flex align-items-center justify-content-around">
 
         <!--        <h1 class="logo"><a href="index.html">BizLand<span>.</span></a></h1>-->
-        <span><img src="../../assets/Images/vrplogo.jpg"/></span>
+        <span><img src="../../assets/Images/vrplogo.jpg" [routerLinkActive]="['active']" [routerLink]="'/home'"/></span>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
 
         <nav [ngClass]="showMobileMenu === true ? 'navbar-mobile' : ''" class="navbar" id="navbar">
             <ul>
-                <li><a class="nav-link scrollto " href="#hero">Home</a></li>
+                <li><a class="nav-link scrollto" [routerLinkActive]="['active']" [routerLink]="'/home'">Home</a></li>
                 <li class="dropdown"><a [routerLinkActive]="['active']"><span>About</span>
                     <i (click)="showDropDown()" [ngClass]="showDropDownMenu === true ? 'bi-chevron-up' : 'bi-chevron-down'"
                        class="bi"></i></a>
