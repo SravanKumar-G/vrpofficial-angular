@@ -2054,7 +2054,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 body {
     font-family: 'Josefin Sans', sans-serif !important;
     color: #444444;
-    background: rgb(3, 48, 0) !important;
+    /*background: rgb(3, 48, 0) !important;*/
 }
 
 a {

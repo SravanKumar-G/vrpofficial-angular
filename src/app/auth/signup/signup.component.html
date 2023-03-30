@@ -320,10 +320,9 @@
                            name="employmentType" type="radio" value="temEmp">
                     <label class="form-check-label" for="employmentType4">Temporarily Employment</label>
                 </div>
-                <div *ngIf="employmentType"
+                <div *ngIf="(employmentTypeVal.invalid && (employmentTypeVal.touched || employmentTypeVal.dirty)) || submitted"
                      class="mt-1">
-                    <span
-                          class="text-danger">Employment Type is required</span>
+                    <span *ngIf="employmentTypeVal.errors?.required" class="text-danger">Employment Type is required</span>
                 </div>
             </div>
             <div class="form-group col-sm-6 col-xs-12">
@@ -370,12 +369,12 @@
                            name="isContestInElection" type="radio" value="No">
                     <label class="form-check-label" for="isContestInElection2">No</label>
                 </div>
-                <div *ngIf="(r.isContestInElection.invalid && (r.isContestInElection.touched || r.isContestInElection.dirty)) || submitted"
+                <div *ngIf="(isContestVali.invalid && (isContestVali.touched || isContestVali.dirty)) || submitted"
                      class="mt-1">
-                    <span *ngIf="r.isContestInElection.errors?.required" class="text-danger">Field is required</span>
+                    <span *ngIf="isContestVali.errors?.required" class="text-danger">Field is required</span>
                 </div>
             </div>
-            <div class="form-group col-sm-6 col-xs-12" *ngIf="r.interestInPolitics.value === 'Yes' && r.isContestInElection.value === 'Yes'">
+            <div class="form-group col-sm-6 col-xs-12" *ngIf="isContestVali.value === 'Yes' && r.interestInPolitics.value === 'Yes'">
                 <div class="label-text form-check-label">If yes how would you like to contest in election ?: <span
                         class="mandatory-field">*</span></div>
                 <select (change)="getDistrictsByStateId('')" class="form-control" formControlName="positionToContest">
@@ -383,9 +382,9 @@
                     <option *ngFor="let pos of positionArray" value="{{pos.value}}">{{pos.key}}</option>
                 </select>
 
-                <div *ngIf="(r.positionToContest.invalid && (r.positionToContest.touched || r.positionToContest.dirty)) || submitted"
+                <div *ngIf="(posVali.invalid && (posVali.touched || posVali.dirty)) || submitted"
                      class="mt-1">
-                    <span *ngIf="r.positionToContest.errors?.required" class="text-danger">Field is required</span>
+                    <span *ngIf="posVali.errors?.required" class="text-danger">Field is required</span>
                 </div>
             </div>
             <div class="form-group col-sm-6 col-xs-12" *ngIf="r.positionToContest.value && r.interestInPolitics.value === 'Yes' && r.isContestInElection.value === 'Yes'">
@@ -394,22 +393,26 @@
                     <option selected value="">--Select District--</option>
                     <option *ngFor="let district of districts" value="{{district._id}}">{{district.name}}</option>
                 </select>
-                <div *ngIf="(r.contestDistrict.invalid && (r.contestDistrict.touched || r.contestDistrict.dirty)) || submitted" class="mt-1">
-                    <span *ngIf="r.contestDistrict.errors?.required" class="text-danger">Contest District is required</span>
+                <div *ngIf="(conDist.invalid && (conDist.touched || conDist.dirty)) || submitted" class="mt-1">
+                    <span *ngIf="conDist.errors?.required" class="text-danger">Contest District is required</span>
                 </div>
             </div>
             <div class="form-group col-sm-6 col-xs-12" *ngIf="r.positionToContest.value && r.interestInPolitics.value === 'Yes' && r.isContestInElection.value === 'Yes'">
                 <div class="label-text form-check-label">In which Constituency would you like to contest in election?
                     <span class="mandatory-field">*</span></div>
-                <select class="form-control" formControlName="contestingConstituency">
+                <select class="form-control" formControlName="contestingConstituency" *ngIf="checkPosType()">
                     <option selected value="">--Select Constituency--</option>
                     <option *ngFor="let constituency of constituencies"
                             value="{{constituency._id}}">{{constituency.name}}</option>
                 </select>
-                <div *ngIf="(r.contestingConstituency.invalid && (r.contestingConstituency.touched || r.contestingConstituency.dirty)) || submitted"
+                <input [ngClass]="{'is-invalid': submitted && conCons.errors}"
+                       autocomplete="off" class="form-control" formControlName="contestingConstituency" id="contestingConstituency1" name="contestingConstituency"
+                       placeholder="Enter Constituency "
+                       required type="text" *ngIf="!checkPosType()">
+                <div *ngIf="(conCons.invalid && (conCons.touched || conCons.dirty)) || submitted"
                      class="mt-1">
-                    <span *ngIf="r.contestingConstituency.errors?.required"
-                          class="text-danger">Constituency is required</span>
+                    <span *ngIf="conCons.errors?.required"
+                          class="text-danger">Field is required</span>
                 </div>
             </div>
             <div class="form-group col-sm-12 col-xs-12">

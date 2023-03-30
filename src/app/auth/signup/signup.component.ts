@@ -56,37 +56,7 @@ export class SignupComponent implements OnInit {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }
-  }
 
-  get r() {
-    return this.signUpForm.controls;
-  }
-
-  signUpForm: any = FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: any= String;
-  error = '';
-  public showAndHideText = 'password';
-  dependents: Array<any> = [{value: '1'}, {value: '2'}, {value: '3'}, {value: '4'}, {value: '5'}, {value: '6'}, {value: '7'},
-    {value: '8'}, {value: '9'}, {value: 'more'},];
-
-  ngOnInit(): void {
-    this.getAllStates();
-
-    function conditionalValidator(predicate: any) {
-      console.log(predicate);
-      return ((formControl: { parent: any; }) => {
-        if (!formControl.parent) {
-          return null;
-        }
-        if (predicate()) {
-        }
-        return null;
-      })
-    }
-
-    // this.getAllConstituencies();
     this.signUpForm = this.formBuilder.group({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
@@ -105,27 +75,112 @@ export class SignupComponent implements OnInit {
       district: new FormControl('', [Validators.required]),
       mandal: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
-      employmentStatus: new FormControl('Yes', [Validators.required]),
-      employmentType: new FormControl('', [conditionalValidator(() => this.signUpForm.get('employmentStatus').value)]),
+      employmentStatus: new FormControl('', [Validators.required]),
+      employmentType: new FormControl(''),
       dependents: new FormControl('', [Validators.required]),
-      interestInPolitics: new FormControl('Yes', [Validators.required]),
-      isContestInElection: new FormControl('Yes'),
+      interestInPolitics: new FormControl('', [Validators.required]),
+      isContestInElection: new FormControl(''),
       positionToContest: new FormControl(''),
       contestDistrict: new FormControl(''),
       contestingConstituency: new FormControl(''),
       typeOfContribution: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
+      description: new FormControl(''),
       acceptConsent: new FormControl('', [Validators.required]),
       acceptDeclaration: new FormControl(''),
     }, {
-      validator: ConfirmPasswordValidator("password", "confirmPassword")
+      validators: [ConfirmPasswordValidator("password", "confirmPassword")]
     });
+    this.validateEmpType();
+    this.validateIntInPolitics();
+    this.positionValidation();
+  }
+
+  get r() {
+    return this.signUpForm.controls;
+  }
+
+  get employmentTypeVal() {
+    return this.signUpForm.get('employmentType');
+  }
+  get isContestVali() {
+    return this.signUpForm.get('isContestInElection');
+  }
+  get posVali() {
+    return this.signUpForm.get('positionToContest');
+  }
+  get conDist() {
+    return this.signUpForm.get('contestDistrict');
+  }
+  get conCons() {
+    return this.signUpForm.get('contestingConstituency');
+  }
+
+  validateEmpType() {
+    this.signUpForm.get('employmentStatus').valueChanges.subscribe((ctrl: string) => {
+      const validators = [Validators.required];
+      const employmentType = this.signUpForm.get('employmentType');
+      if (ctrl === 'Yes') {
+        this.signUpForm.get('employmentType').value = '';
+        employmentType.addValidators(validators);
+      }else{
+        employmentType.removeValidators(validators);
+      }
+      employmentType.updateValueAndValidity();
+    });
+  }
+  validateIntInPolitics() {
+    this.signUpForm.get('interestInPolitics').valueChanges.subscribe((ctrl: string) => {
+      const validators = [Validators.required];
+      const isContestInElection = this.signUpForm.get('isContestInElection');
+      if (ctrl === 'Yes') {
+        isContestInElection.addValidators(validators);
+      }else{
+        isContestInElection.removeValidators(validators);
+      }
+      isContestInElection.updateValueAndValidity();
+    });
+  }
+
+  positionValidation() {
+    this.signUpForm.get('isContestInElection').valueChanges.subscribe((ctrl: string) => {
+      const validators = [Validators.required];
+      const positionToContest = this.signUpForm.get('positionToContest');
+      const contestDistrict = this.signUpForm.get('contestDistrict');
+      const contestingConstituency = this.signUpForm.get('contestingConstituency');
+      if (ctrl === 'Yes') {
+        positionToContest.addValidators(validators);
+        contestDistrict.addValidators(validators);
+        contestingConstituency.addValidators(validators);
+      }else{
+        positionToContest.removeValidators(validators);
+        contestDistrict.removeValidators(validators);
+        contestingConstituency.removeValidators(validators);
+      }
+      positionToContest.updateValueAndValidity();
+      contestDistrict.updateValueAndValidity();
+      contestingConstituency.updateValueAndValidity();
+    });
+  }
+
+    signUpForm: any = FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: any= String;
+  error = '';
+  public showAndHideText = 'password';
+  dependents: Array<any> = [{value: '1'}, {value: '2'}, {value: '3'}, {value: '4'}, {value: '5'}, {value: '6'}, {value: '7'},
+    {value: '8'}, {value: '9'}, {value: 'more'},];
+
+
+  ngOnInit(): void {
+    this.getAllStates();
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
 
   onRegister() {
     this.submitted = true;
+    console.log(this.signUpForm);
     // stop here if form is invalid
     if (this.signUpForm.invalid) {
       return;
@@ -231,7 +286,7 @@ export class SignupComponent implements OnInit {
     const distId = event.target.value;
     if (position === 'MP') {
       apiUrl = this.apiUrls.getParliamentConst;
-    }else if (position === 'MLA' || position === 'MLC') {
+    }else if (position !== 'MP') {
       apiUrl = this.apiUrls.getConstituenciesByDistrict + distId;
     }
     this.apiService.get(apiUrl).subscribe((res: any) => {
@@ -241,5 +296,13 @@ export class SignupComponent implements OnInit {
     }, erorr => {
       this.error = erorr.error.message;
     });
+  }
+
+  checkPosType() {
+    if(this.r.positionToContest.value === 'MP' || this.r.positionToContest.value === 'MLA' || this.r.positionToContest.value === 'MLC') {
+      return true;
+    }else{
+      return false;
+    }
   }
 }
