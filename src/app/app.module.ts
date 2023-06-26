@@ -27,6 +27,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { OnlynumberDirective } from './directives/onlynumber.directive';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { GalleryComponent } from './gallery/gallery.component';
     FooterComponent,
     ContactComponent,
     GalleryComponent,
+    OnlynumberDirective,
   ],
   imports: [
     BrowserModule,

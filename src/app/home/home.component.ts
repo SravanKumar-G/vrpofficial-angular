@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
     });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-    this.getTimer();
+    // this.getTimer();
   }
 
   onSubmit(): void {
