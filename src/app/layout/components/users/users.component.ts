@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ConfirmPasswordValidator} from "@app/services/ConfirmPassword.validator";
+import {OnlynumberDirective} from "@app/directives/onlynumber.directive";
 
 @Component({
     selector: 'app-users',
@@ -19,7 +20,8 @@ export class UsersComponent implements OnInit {
     mandals: Array<any> = [];
     query: any = {
         page: 1,
-        count: 50,
+        size: 10,
+        pageSizes: [],
         phoneNumber: '',
         state: '',
         district: '',
@@ -45,6 +47,7 @@ export class UsersComponent implements OnInit {
     public ConfirmPasswordShowAndHideText = 'password';
     isTrue: boolean = false;
     isTrueConfirm: boolean = false;
+    public usersCount: any;
 
     get r() {
         return this.resetPassForm.controls;
@@ -120,6 +123,8 @@ export class UsersComponent implements OnInit {
         this.apiService.getAll(this.apiUrls.getAllUsers, this.query).subscribe((res: any) => {
             if (res) {
                 this.listOfAllUsers = res.data.data;
+                this.usersCount = res.data.total;
+                OnlynumberDirective.pagination(res.data.total, this.query);
             }
         });
     }
@@ -129,45 +134,6 @@ export class UsersComponent implements OnInit {
     //     this.ngModalService.open(this.addUserModal, {size: 'lg', backdrop: 'static', keyboard: false})
     // }
 
-    saveUser(): void {
-        this.errors = [];
-        if (!this.data.phoneNumber) {
-            this.errors.push('Please enter 10 digit mobile number');
-        } else if (!this.data.firstName) {
-            this.errors.push('Please enter First Name');
-        } else if (!this.data.lastName) {
-            this.errors.push('Please enter Last Name');
-        } else if (!this.userId && !this.data.password) {
-            this.errors.push('Please enter password');
-        } else if (!this.userId && this.data.password.length < 6) {
-            this.errors.push('Password should be 6 letters or more');
-        } else if (!this.data.email) {
-            this.errors.push('Please enter Email');
-        } else if (!this.data.role) {
-            this.errors.push('Please select Role');
-        } else {
-            if (!this.userId) {
-                this.apiService.getAll(this.apiUrls.addUser, this.data).subscribe((res: any) => {
-                    if (res) {
-                        this.close();
-                        Swal.fire('success', 'User added successfully..!', 'success');
-                        this.getAllUser();
-                        this.data = {};
-                    }
-                })
-            } else {
-                delete this.data.password;
-                this.apiService.update(this.apiUrls.updateById + this.userId, this.data).subscribe((res: any) => {
-                    if (res) {
-                        this.close();
-                        Swal.fire('success', 'User updated successfully..!', 'success');
-                        this.data = {};
-                        this.getAllUser();
-                    }
-                })
-            }
-        }
-    }
 
     close(): void {
         this.ngModalService.dismissAll();
@@ -308,5 +274,17 @@ export class UsersComponent implements OnInit {
 
     toggleConfirmPasswordVisibility(showOrHide: any) {
         this.showConfirmPassword = showOrHide;
+    }
+
+    handlePageChange(event: any): void {
+        this.query.page = event;
+        this.getAllUser();
+    }
+
+    handlePageSizeChange(event: any): void {
+        console.log(event);
+        this.query.size = event;
+        this.query.page = 1;
+        this.getAllUser();
     }
 }

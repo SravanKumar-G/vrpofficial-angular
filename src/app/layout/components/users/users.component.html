@@ -73,7 +73,7 @@
                             </thead>
                             <tbody>
                             <tr *ngFor="let user of listOfAllUsers; let i = index">
-                                <td>{{i + 1}}</td>
+                                <td>{{(query.page - 1) * query.size + i + 1}}</td>
                                 <td>{{user.firstName + ' ' + user.lastName}}</td>
                                 <td>{{user.fatherFirstName + ' ' + user.fatherLastName}}</td>
                                 <td>{{user.motherFirstName + ' ' + user.motherLastName}}</td>
@@ -106,6 +106,13 @@
                             <tfoot>
                             <tr *ngIf="listOfAllUsers.length === 0">
                                 <td colspan="10">No Data found</td>
+                            </tr>
+                            <tr *ngIf="usersCount !== 0">
+                                <th colSpan="10">
+                                    <div class="pull-right">
+                                        Total Count : {{ usersCount || 0}}
+                                    </div>
+                                </th>
                             </tr>
                             </tfoot>
                         </table>
@@ -168,6 +175,27 @@
                             </tr>
                             </tbody>
                         </table>
+                        <div class="form-group">
+                            <div class="list-row">
+                                <ngb-pagination *ngIf="usersCount || usersCount !== 0"
+                                                [(page)]="query.page"
+                                                [pageSize]="query.size"
+                                                [collectionSize]="usersCount"
+                                                [boundaryLinks]="true"
+                                                (pageChange)="handlePageChange($event)"
+                                                [maxSize]="5">
+                                </ngb-pagination>
+                            </div>
+                            <ul class="pagination pull-right" style="margin-top: -49px !important;"
+                                *ngIf="usersCount || usersCount !== 0">
+                                <li class="page-item" [ngClass]="size == query.size ? 'active' : ''"
+                                    *ngFor="let size of query.pageSizes" (click)="handlePageSizeChange(size)">
+                                    <button class="page-link"> {{ size }}
+                                        <span class="sr-only">(current)</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

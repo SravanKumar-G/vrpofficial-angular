@@ -37,9 +37,10 @@ exports.addUser = async (body, next) => {
 
 exports.getAllUsers = async (req, next) => {
   try {
+    console.log(req);
     let query = {status: false};
     const pageNumber = req.page || 0;
-    const limit = req.count || 10;
+    const limit = req.size || 10;
     const result = {};
     if (req.phoneNumber) {
       query.phoneNumber =  req.phoneNumber ;
