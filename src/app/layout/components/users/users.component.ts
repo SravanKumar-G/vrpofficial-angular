@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit {
     mandals: Array<any> = [];
     query: any = {
         page: 1,
-        size: 100,
+        size: 500,
         pageSizes: [],
         phoneNumber: '',
         state: '',
